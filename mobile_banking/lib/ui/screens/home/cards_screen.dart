@@ -4,6 +4,7 @@ import 'package:stacked_card_carousel/stacked_card_carousel.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../components/mobix_card.dart';
 import '../../../models/demo_models.dart';
+import 'card_details_screen.dart';
 
 class CardsScreen extends StatefulWidget {
   const CardsScreen({super.key});
@@ -21,7 +22,7 @@ class _CardsScreenState extends State<CardsScreen> {
     super.initState();
     cards = [
       DemoCard(
-        logo: 'assets/icons/logo_walmart.png',
+        logo: 'assets/icons/ic_card_logo.png',
         type: 'Visa',
         maskedNumber: '**** 1234',
         expiry: '12/26',
@@ -32,7 +33,7 @@ class _CardsScreenState extends State<CardsScreen> {
         ),
       ),
       DemoCard(
-        logo: 'assets/icons/logo_walmart.png',
+        logo: 'assets/icons/ic_card_logo.png',
         type: 'Mastercard',
         maskedNumber: '**** 5678',
         expiry: '09/25',
@@ -43,7 +44,7 @@ class _CardsScreenState extends State<CardsScreen> {
         ),
       ),
       DemoCard(
-        logo: 'assets/icons/logo_walmart.png',
+        logo: 'assets/icons/ic_card_logo.png',
         type: 'Amex',
         maskedNumber: '**** 9012',
         expiry: '03/27',
@@ -54,7 +55,7 @@ class _CardsScreenState extends State<CardsScreen> {
         ),
       ),
       DemoCard(
-        logo: 'assets/icons/logo_walmart.png',
+        logo: 'assets/icons/ic_card_logo.png',
         type: 'Discover',
         maskedNumber: '**** 3456',
         expiry: '11/28',
@@ -132,11 +133,11 @@ class _CardsScreenState extends State<CardsScreen> {
                             right: 0,
                             child: GestureDetector(
                               onTap: () {
-                                if (i == cards.length - 1) return; // already on top
-                                setState(() {
-                                  final card = cards.removeAt(i);
-                                  cards.add(card);
-                                });
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => CardDetailsScreen(card: cards[i]),
+                                  ),
+                                );
                               },
                               child: SizedBox(
                                 height: cardHeight,

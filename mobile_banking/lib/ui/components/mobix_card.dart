@@ -11,7 +11,7 @@ class MobixCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
       decoration: BoxDecoration(
         gradient: card.gradient,
         borderRadius: BorderRadius.circular(24.r),
@@ -30,8 +30,8 @@ class MobixCard extends StatelessWidget {
             right: -40.w,
             bottom: -40.w,
             child: Container(
-              width: 140.w,
-              height: 140.w,
+              width: 120.w,
+              height: 120.w,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: const Color(0xFFFFD600),
@@ -55,8 +55,8 @@ class MobixCard extends StatelessWidget {
                       children: [
                         Image.asset(
                           card.logo,
-                          width: 24.w,
-                          height: 24.w,
+                          width: 20.w,
+                          height: 20.w,
                         ),
                         SizedBox(width: 12.w),
                         Text(
@@ -86,12 +86,11 @@ class MobixCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: 12.h),
                 Text(
                   'ABDULLAH MAHMUD',
-                  style: AppTextStyles.header.copyWith(
+                  style: AppTextStyles.title.copyWith(
                     color: Colors.white,
-                    fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 1.2,
                   ),
@@ -104,14 +103,12 @@ class MobixCard extends StatelessWidget {
                       'Valid Thru - ${card.expiry}',
                       style: AppTextStyles.body.copyWith(
                         color: Colors.white.withOpacity(0.7),
-                        fontSize: 13.sp,
                       ),
                     ),
                     Text(
                       'CVV - 5485',
                       style: AppTextStyles.body.copyWith(
                         color: Colors.white.withOpacity(0.7),
-                        fontSize: 13.sp,
                       ),
                     ),
                   ],
@@ -126,16 +123,23 @@ class MobixCard extends StatelessWidget {
                 ),
                 SizedBox(height: 2.h),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(Icons.remove_red_eye_outlined, color: Colors.white, size: 20.sp),
+                    Baseline(
+                      baseline: 20.sp,
+                      baselineType: TextBaseline.alphabetic,
+                      child: Icon(Icons.remove_red_eye_outlined, color: Colors.white, size: 20.sp),
+                    ),
                     SizedBox(width: 8.w),
-                    Text(
-                      '1547,00',
-                      style: AppTextStyles.title.copyWith(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w700,
+                    Baseline(
+                      baseline: 20.sp,
+                      baselineType: TextBaseline.alphabetic,
+                      child: Text(
+                        '1547,00',
+                        style: AppTextStyles.title.copyWith(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                     SizedBox(width: 6.w),

@@ -33,11 +33,11 @@ class LatestTransactions extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               itemCount: demoTransactions.length,
-              separatorBuilder: (_, __) => SizedBox(height: 6.h),
+              separatorBuilder: (_, __) => SizedBox(height: 0.h),
               itemBuilder: (context, index) {
                 final tx = demoTransactions[index];
                 return Container(
-                  padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+                  padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.r),
