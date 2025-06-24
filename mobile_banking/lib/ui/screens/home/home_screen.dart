@@ -4,6 +4,7 @@ import 'widgets/balance_card.dart';
 import 'widgets/recent_transfers.dart';
 import 'widgets/latest_transactions.dart';
 import 'widgets/bottom_nav_bar.dart';
+import 'cards_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,19 +21,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: IndexedStack(
+          index: _selectedIndex,
           children: [
-            // Header (profile, greeting, notification)
-            const HomeHeader(),
-            // Balance Card
-            const BalanceCard(),
-            // Recent Transfers (fixed height)
-            SizedBox(
-              height: 145.h, // enough for avatars and text
-              child: RecentTransfers(),
+            // Home page
+            Column(
+              children: [
+                const HomeHeader(),
+                const BalanceCard(),
+                SizedBox(
+                  height: 145.h,
+                  child: RecentTransfers(),
+                ),
+                const Expanded(child: LatestTransactions()),
+              ],
             ),
-            // Latest Transactions
-            const Expanded(child: LatestTransactions()),
+            // Cards page (to be implemented)
+            const CardsScreen(),
           ],
         ),
       ),

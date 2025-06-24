@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class User {
   final String name;
   final String avatarUrl;
@@ -18,4 +20,13 @@ class Beneficiary {
   final String name;
   final String avatarUrl;
   Beneficiary({required this.name, required this.avatarUrl});
+}
+
+class DemoCard {
+  final String logo;
+  final String type;
+  final String maskedNumber;
+  final String expiry;
+  final Gradient gradient;
+  DemoCard({required this.logo, required this.type, required this.maskedNumber, required this.expiry, required this.gradient});
 } 
