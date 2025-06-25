@@ -7,13 +7,15 @@ import 'package:easy_localization/easy_localization.dart';
 
 class MobixCard extends StatelessWidget {
   final DemoCard card;
-  const MobixCard({super.key, required this.card});
+  final double? height;
+  const MobixCard({super.key, required this.card, this.height});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      height: height,
+      padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 22.h),
       decoration: BoxDecoration(
         gradient: card.gradient,
         borderRadius: BorderRadius.circular(24.r),
@@ -47,7 +49,7 @@ class MobixCard extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -85,6 +87,7 @@ class MobixCard extends StatelessWidget {
                   card.cardholderName,
                   style: AppTextStyles.title.copyWith(
                     color: Colors.white,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 1.2,
                   ),
@@ -132,7 +135,7 @@ class MobixCard extends StatelessWidget {
                         card.balance,
                         style: AppTextStyles.title.copyWith(
                           color: Colors.white,
-                          fontSize: 18.sp,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

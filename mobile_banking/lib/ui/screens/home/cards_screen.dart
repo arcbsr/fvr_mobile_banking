@@ -23,132 +23,138 @@ class _CardsScreenState extends State<CardsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<DemoCard>>(
-      future: _repo.getCards(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
+    return WillPopScope(
+      onWillPop: () async {
+        if (expanded) {
+          setState(() => expanded = false);
+          return false;
         }
-        final cards = snapshot.data!;
-        // Always move the last tapped card to the last position in collapsed mode
-        List<DemoCard> orderedCards = List.from(cards);
-        if (!expanded && lastCardIndex != null) {
-          final card = orderedCards.removeAt(lastCardIndex!);
-          orderedCards.add(card);
-        }
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 18.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(AppLocalizations.myCards, style: AppTextStyles.header.copyWith(fontSize: 22.sp)),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(8.r),
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Text(
-                          AppLocalizations.addCard,
-                          style: AppTextStyles.header.copyWith(
-                            color: Theme.of(context).primaryColor,
+        return true;
+      },
+      child: FutureBuilder<List<DemoCard>>(
+        future: _repo.getCards(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          final cards = snapshot.data!;
+          // Always move the last tapped card to the last position in collapsed mode
+          List<DemoCard> orderedCards = List.from(cards);
+          if (!expanded && lastCardIndex != null) {
+            final card = orderedCards.removeAt(lastCardIndex!);
+            orderedCards.add(card);
+          }
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 18.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(AppLocalizations.myCards, style: AppTextStyles.header.copyWith(fontSize: 22.sp)),
+                    InkWell(
+                      borderRadius: BorderRadius.circular(8.r),
+                      onTap: () {},
+                      child: Row(
+                        children: [
+                          Text(
+                            AppLocalizations.addCard,
+                            style: AppTextStyles.header.copyWith(
+                              color: Theme.of(context).primaryColor,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 8.w),
-                        Icon(
-                          Icons.add,
-                          color: Theme.of(context).primaryColor,
-                          size: 22.sp,
-                        ),
-                      ],
+                          SizedBox(width: 8.w),
+                          Icon(
+                            Icons.add,
+                            color: Theme.of(context).primaryColor,
+                            size: 22.sp,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 18.h),
-              Expanded(
-                child: GestureDetector(
-                  onVerticalDragEnd: (details) {
-                    if (details.primaryVelocity != null && details.primaryVelocity! > 100) {
-                      // Swipe down to expand
-                      setState(() => expanded = true);
-                    }
-                  },
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final availableHeight = constraints.maxHeight - 16.h;
-                      final n = orderedCards.length;
-                      double cardHeight = 220.h;
-                      double cardOverlap = cardHeight * 0.25;
-                      double stackHeight = cardHeight + (n - 1) * cardOverlap;
-                      if (stackHeight > availableHeight) {
-                        cardHeight = availableHeight / (1 + 0.25 * (n - 1));
-                        cardOverlap = cardHeight * 0.25;
-                        stackHeight = cardHeight + (n - 1) * cardOverlap;
+                  ],
+                ),
+                SizedBox(height: 18.h),
+                Expanded(
+                  child: GestureDetector(
+                    onVerticalDragEnd: (details) {
+                      if (details.primaryVelocity != null && details.primaryVelocity! > 100) {
+                        // Swipe down to expand
+                        setState(() => expanded = true);
                       }
-                      return AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 350),
-                        child: expanded
-                            ? ListView.builder(
-                                key: const ValueKey('expanded'),
-                                itemCount: orderedCards.length,
-                                itemBuilder: (context, i) => Padding(
-                                  padding: EdgeInsets.only(bottom: 16.h),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        expanded = false;
-                                        lastCardIndex = i;
-                                      });
-                                    },
-                                    child: MobixCard(card: orderedCards[i]),
+                    },
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final double cardHeight = 220.h;
+                        final n = orderedCards.length;
+                        final double cardOverlap = cardHeight * 0.25;
+                        final double stackHeight = cardHeight + (n - 1) * cardOverlap;
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 350),
+                          child: expanded
+                              ? ListView.builder(
+                                  key: const ValueKey('expanded'),
+                                  itemCount: orderedCards.length,
+                                  itemBuilder: (context, i) => Padding(
+                                    padding: EdgeInsets.only(bottom: 16.h),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          expanded = false;
+                                          lastCardIndex = i;
+                                        });
+                                      },
+                                      child: SizedBox(
+                                        height: cardHeight,
+                                        child: MobixCard(card: orderedCards[i]),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              )
-                            : Align(
-                                key: const ValueKey('collapsed'),
-                                alignment: Alignment.topCenter,
-                                child: SizedBox(
-                                  height: stackHeight,
-                                  child: Stack(
-                                    children: [
-                                      for (int i = 0; i < orderedCards.length; i++)
-                                        AnimatedPositioned(
-                                          duration: const Duration(milliseconds: 350),
-                                          curve: Curves.easeInOut,
-                                          top: i * cardOverlap,
-                                          left: 0,
-                                          right: 0,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (context) => CardDetailsScreen(card: orderedCards[i]),
-                                                ),
-                                              );
-                                            },
-                                            child: SizedBox(
-                                              height: cardHeight,
-                                              child: MobixCard(card: orderedCards[i]),
+                                )
+                              : Align(
+                                  key: const ValueKey('collapsed'),
+                                  alignment: Alignment.topCenter,
+                                  child: SizedBox(
+                                    height: stackHeight,
+                                    child: Stack(
+                                      children: [
+                                        for (int i = 0; i < orderedCards.length; i++)
+                                          AnimatedPositioned(
+                                            duration: const Duration(milliseconds: 350),
+                                            curve: Curves.easeInOut,
+                                            top: i * cardOverlap,
+                                            left: 0,
+                                            right: 0,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) => CardDetailsScreen(card: orderedCards[i]),
+                                                  ),
+                                                );
+                                              },
+                                              child: SizedBox(
+                                                height: cardHeight,
+                                                child: MobixCard(card: orderedCards[i]),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

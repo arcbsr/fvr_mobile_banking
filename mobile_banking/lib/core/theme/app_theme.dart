@@ -21,7 +21,7 @@ class AppTextStyles {
   static TextStyle get title => TextStyle(
         fontFamily: 'Nunito',
         fontWeight: FontWeight.w800,
-        fontSize: 16.sp,
+        fontSize: 18.sp,
         color: const Color(0xFF191919),
       );
   static TextStyle get body => TextStyle(

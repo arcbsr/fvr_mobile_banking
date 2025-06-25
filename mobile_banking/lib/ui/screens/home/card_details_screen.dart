@@ -28,7 +28,10 @@ class CardDetailsScreen extends StatelessWidget {
           SizedBox(height: 8.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: MobixCard(card: card),
+            child: SizedBox(
+              height: 220.h,
+              child: MobixCard(card: card),
+            ),
           ),
           Expanded(
             child: Padding(

@@ -23,7 +23,18 @@ class LatestTransactions extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-              child: Text('latestTransactions'.tr(), style: AppTextStyles.header.copyWith(fontSize: 18.sp)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('latestTransactions'.tr(), style: AppTextStyles.header.copyWith(fontSize: 18.sp)),
+                  TextButton(
+                    onPressed: () {
+                      // TODO: Implement view all action
+                    },
+                    child: Text('viewAll'.tr(), style: AppTextStyles.caption),
+                  ),
+                ],
+              ),
             ),
             Expanded(
               child: ListView.separated(
