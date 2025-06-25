@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_card_carousel/stacked_card_carousel.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../components/mobix_card.dart';
-import '../../../models/demo_models.dart';
 import 'card_details_screen.dart';
+import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
+import 'package:mobile_banking/domain/entities/card_entity.dart';
 
 class CardsScreen extends StatefulWidget {
   const CardsScreen({super.key});
@@ -14,146 +15,103 @@ class CardsScreen extends StatefulWidget {
 }
 
 class _CardsScreenState extends State<CardsScreen> {
-  int _selectedIndex = 0;
-  late List<DemoCard> cards;
-
-  @override
-  void initState() {
-    super.initState();
-    cards = [
-      DemoCard(
-        logo: 'assets/icons/ic_card_logo.png',
-        type: 'Visa',
-        maskedNumber: '**** 1234',
-        expiry: '12/26',
-        gradient: const LinearGradient(
-          colors: [Color(0xFF270685), Color(0xFF5732BF)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      DemoCard(
-        logo: 'assets/icons/ic_card_logo.png',
-        type: 'Mastercard',
-        maskedNumber: '**** 5678',
-        expiry: '09/25',
-        gradient: const LinearGradient(
-          colors: [Color(0xFF4DA66B), Color(0xFF6F45E9)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      DemoCard(
-        logo: 'assets/icons/ic_card_logo.png',
-        type: 'Amex',
-        maskedNumber: '**** 9012',
-        expiry: '03/27',
-        gradient: const LinearGradient(
-          colors: [Color(0xFF191970), Color(0xFF00BFFF)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      DemoCard(
-        logo: 'assets/icons/ic_card_logo.png',
-        type: 'Discover',
-        maskedNumber: '**** 3456',
-        expiry: '11/28',
-        gradient: const LinearGradient(
-          colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-    ];
-  }
+  final _repo = DemoHomeRepository();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 18.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return FutureBuilder<List<DemoCard>>(
+      future: _repo.getCards(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        }
+        final cards = snapshot.data!;
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('My Cards', style: AppTextStyles.header.copyWith(fontSize: 22.sp)),
-              InkWell(
-                borderRadius: BorderRadius.circular(8.r),
-                onTap: () {},
-                child: Row(
-                  children: [
-                    Text(
-                      'Add card',
-                      style: AppTextStyles.header.copyWith(
-                        fontSize: 18.sp,
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w700,
+              SizedBox(height: 18.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('My Cards', style: AppTextStyles.header.copyWith(fontSize: 22.sp)),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(8.r),
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Text(
+                          'Add card',
+                          style: AppTextStyles.header.copyWith(
+                            fontSize: 18.sp,
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Icon(
+                          Icons.add,
+                          color: Theme.of(context).primaryColor,
+                          size: 22.sp,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 18.h),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final availableHeight = constraints.maxHeight - 16.h;
+                    final n = cards.length;
+                    double cardHeight = 220.h;
+                    double cardOverlap = cardHeight * 0.25;
+                    double stackHeight = cardHeight + (n - 1) * cardOverlap;
+                    if (stackHeight > availableHeight) {
+                      cardHeight = availableHeight / (1 + 0.25 * (n - 1));
+                      cardOverlap = cardHeight * 0.25;
+                      stackHeight = cardHeight + (n - 1) * cardOverlap;
+                    }
+                    return Align(
+                      alignment: Alignment.topCenter,
+                      child: SizedBox(
+                        height: stackHeight,
+                        child: Stack(
+                          children: [
+                            for (int i = 0; i < cards.length; i++)
+                              AnimatedPositioned(
+                                duration: const Duration(milliseconds: 350),
+                                curve: Curves.easeInOut,
+                                top: i * cardOverlap,
+                                left: 0,
+                                right: 0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => CardDetailsScreen(card: cards[i]),
+                                      ),
+                                    );
+                                  },
+                                  child: SizedBox(
+                                    height: cardHeight,
+                                    child: MobixCard(card: cards[i]),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 8.w),
-                    Icon(
-                      Icons.add,
-                      color: Theme.of(context).primaryColor,
-                      size: 22.sp,
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ],
           ),
-          SizedBox(height: 18.h),
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final availableHeight = constraints.maxHeight - 16.h;
-                final n = cards.length;
-                double cardHeight = 220.h;
-                double cardOverlap = cardHeight * 0.25;
-                double stackHeight = cardHeight + (n - 1) * cardOverlap;
-                if (stackHeight > availableHeight) {
-                  cardHeight = availableHeight / (1 + 0.25 * (n - 1));
-                  cardOverlap = cardHeight * 0.25;
-                  stackHeight = cardHeight + (n - 1) * cardOverlap;
-                }
-                return Align(
-                  alignment: Alignment.topCenter,
-                  child: SizedBox(
-                    height: stackHeight,
-                    child: Stack(
-                      children: [
-                        for (int i = 0; i < cards.length; i++)
-                          AnimatedPositioned(
-                            duration: const Duration(milliseconds: 350),
-                            curve: Curves.easeInOut,
-                            top: i * cardOverlap,
-                            left: 0,
-                            right: 0,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => CardDetailsScreen(card: cards[i]),
-                                  ),
-                                );
-                              },
-                              child: SizedBox(
-                                height: cardHeight,
-                                child: MobixCard(card: cards[i]),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -208,32 +166,24 @@ class _CardWidget extends StatelessWidget {
                     Row(
                       children: [
                         Image.asset(
-                          'assets/icons/ic_home.png', // Replace with Mobix logo asset
+                          card.logo,
                           width: 32.w,
                           height: 32.w,
                         ),
                         SizedBox(width: 8.w),
                         Text(
-                          'Mobix',
+                          card.type,
                           style: AppTextStyles.header.copyWith(
                             color: Colors.white,
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        SizedBox(width: 6.w),
-                        Text(
-                          'Premium',
-                          style: AppTextStyles.body.copyWith(
-                            color: Colors.white.withOpacity(0.6),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                        // Optionally, add a card tier or other info if available in DemoCard
                       ],
                     ),
                     Text(
-                      '**** **** 3245',
+                      card.maskedNumber,
                       style: AppTextStyles.header.copyWith(
                         color: Colors.white,
                         fontSize: 16.sp,
@@ -245,7 +195,7 @@ class _CardWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 18.h),
                 Text(
-                  'ABDULLAH MAHMUD',
+                  card.cardholderName,
                   style: AppTextStyles.header.copyWith(
                     color: Colors.white,
                     fontSize: 16.sp,
@@ -258,60 +208,17 @@ class _CardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Valid Thru - 05 / 32',
+                      'Valid Thru - ${card.expiry}',
                       style: AppTextStyles.body.copyWith(
                         color: Colors.white.withOpacity(0.7),
                         fontSize: 13.sp,
                       ),
                     ),
-                    Text(
-                      'CVV - 5485',
-                      style: AppTextStyles.body.copyWith(
-                        color: Colors.white.withOpacity(0.7),
-                        fontSize: 13.sp,
-                      ),
-                    ),
+                    // Optionally, add CVV if available in DemoCard
                   ],
                 ),
                 SizedBox(height: 18.h),
-                Text(
-                  'Balance',
-                  style: AppTextStyles.body.copyWith(
-                    color: Colors.white.withOpacity(0.7),
-                    fontSize: 14.sp,
-                  ),
-                ),
-                SizedBox(height: 6.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Icon(Icons.remove_red_eye_outlined, color: Colors.white, size: 20.sp),
-                    SizedBox(width: 8.w),
-                    Text(
-                      '1547,00',
-                      style: AppTextStyles.title.copyWith(
-                        color: Colors.white,
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(width: 6.w),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 2.h),
-                      child: Text(
-                        'DZD',
-                        style: AppTextStyles.body.copyWith(
-                          color: Colors.white,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 16.w),
-                    Icon(Icons.nfc, color: Colors.white, size: 28.sp),
-                  ],
-                ),
+                // Optionally, add balance if available in DemoCard
               ],
             ),
           ),

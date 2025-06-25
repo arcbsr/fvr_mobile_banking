@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/theme/app_theme.dart';
-import '../../models/demo_models.dart';
+import 'package:mobile_banking/domain/entities/card_entity.dart';
 
 class MobixCard extends StatelessWidget {
   final DemoCard card;
@@ -60,18 +60,10 @@ class MobixCard extends StatelessWidget {
                         ),
                         SizedBox(width: 12.w),
                         Text(
-                          'Mobix',
+                          card.type,
                           style: AppTextStyles.title.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        SizedBox(width: 6.w),
-                        Text(
-                          card.type,
-                          style: AppTextStyles.body.copyWith(
-                            color: Colors.white.withOpacity(0.6),
-                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ],
@@ -88,7 +80,7 @@ class MobixCard extends StatelessWidget {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  'ABDULLAH MAHMUD',
+                  card.cardholderName,
                   style: AppTextStyles.title.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -105,12 +97,13 @@ class MobixCard extends StatelessWidget {
                         color: Colors.white.withOpacity(0.7),
                       ),
                     ),
-                    Text(
-                      'CVV - 5485',
-                      style: AppTextStyles.body.copyWith(
-                        color: Colors.white.withOpacity(0.7),
+                    if (card.cvv != null && card.cvv.isNotEmpty)
+                      Text(
+                        'CVV - ${card.cvv}',
+                        style: AppTextStyles.body.copyWith(
+                          color: Colors.white.withOpacity(0.7),
+                        ),
                       ),
-                    ),
                   ],
                 ),
                 SizedBox(height: 48.h),
@@ -134,7 +127,7 @@ class MobixCard extends StatelessWidget {
                       baseline: 20.sp,
                       baselineType: TextBaseline.alphabetic,
                       child: Text(
-                        '1547,00',
+                        card.balance,
                         style: AppTextStyles.title.copyWith(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -146,7 +139,7 @@ class MobixCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(bottom: 2.h),
                       child: Text(
-                        'DZD',
+                        card.currency,
                         style: AppTextStyles.body.copyWith(
                           color: Colors.white,
                           fontSize: 14.sp,

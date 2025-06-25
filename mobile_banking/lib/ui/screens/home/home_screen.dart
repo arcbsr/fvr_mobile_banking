@@ -27,13 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
             // Home page
             Column(
               children: [
-                const HomeHeader(),
+                HomeHeader(),
                 const BalanceCard(),
                 SizedBox(
-                  height: 145.h,
+                  height: 150.h,
                   child: RecentTransfers(),
                 ),
-                const Expanded(child: LatestTransactions()),
+                Expanded(child: LatestTransactions()),
               ],
             ),
             // Cards page (to be implemented)

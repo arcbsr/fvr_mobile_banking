@@ -1,70 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_banking/data/demo_data.dart';
+import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
 import 'package:mobile_banking/core/theme/app_theme.dart';
+import 'package:mobile_banking/domain/entities/beneficiary_entity.dart';
 
 class RecentTransfers extends StatelessWidget {
-  const RecentTransfers({super.key});
+  RecentTransfers({super.key});
+  final _repo = DemoHomeRepository();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 16.w, top: 16.h, right: 0, bottom: 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return FutureBuilder<List<Beneficiary>>(
+      future: _repo.getRecentTransfers(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return SizedBox(height: 80.h); // Placeholder height
+        }
+        final beneficiaries = snapshot.data!;
+        return Padding(
+          padding: EdgeInsets.only(left: 16.w, top: 16.h, right: 0, bottom: 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Recent Transfers',
-                style: AppTextStyles.title,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Recent Transfers',
+                    style: AppTextStyles.title,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'View all',
+                      style: AppTextStyles.caption,
+                    ),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'View all',
-                  style: AppTextStyles.caption,
+              SizedBox(height: 12.h),
+              SizedBox(
+                height: 90.h,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: beneficiaries.length + 1,
+                  separatorBuilder: (_, __) => SizedBox(width: 12.w),
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return _AddBeneficiary();
+                    }
+                    final b = beneficiaries[index - 1];
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 28.r,
+                          backgroundImage: AssetImage(b.avatarUrl),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                          b.name,
+                          style: AppTextStyles.body.copyWith(fontSize: 13.sp),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],
           ),
-          SizedBox(height: 12.h),
-          SizedBox(
-            height: 82.h,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: demoBeneficiaries.length + 1,
-              separatorBuilder: (_, __) => SizedBox(width: 16.w),
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return _AddBeneficiary();
-                }
-                final beneficiary = demoBeneficiaries[index - 1];
-                return Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 24.w,
-                      backgroundImage: AssetImage(beneficiary.avatarUrl),
-                    ),
-                    SizedBox(height: 8.h),
-                    SizedBox(
-                      width: 56.w,
-                      child: Text(
-                        beneficiary.name,
-                        style: AppTextStyles.caption,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -73,10 +79,11 @@ class _AddBeneficiary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: 48.w,
-          height: 48.w,
+          width: 56.w,
+          height: 56.w,
           decoration: BoxDecoration(
             color: const Color(0xFFE6DDFF),
             shape: BoxShape.circle,

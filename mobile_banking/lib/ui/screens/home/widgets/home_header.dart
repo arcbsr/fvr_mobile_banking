@@ -1,69 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_banking/data/demo_data.dart';
+import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
 import 'package:mobile_banking/core/theme/app_theme.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+  HomeHeader({super.key});
+  final _repo = DemoHomeRepository();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
+    return FutureBuilder(
+      future: _repo.getUser(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return SizedBox(height: 60.h); // Placeholder height
+        }
+        final user = snapshot.data!;
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 20.r,
-                backgroundImage: AssetImage(demoUser.avatarUrl),
-              ),
-              SizedBox(width: 12.w),
-              Text(
-                'Hello, Abdullah!',
-                style: AppTextStyles.header,
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF4DA66B),
-                  borderRadius: BorderRadius.circular(36.r),
-                ),
-                child: Text(
-                  'Earn 300 DZD',
-                  style: AppTextStyles.body.copyWith(color: Colors.white),
-                ),
-              ),
-              SizedBox(width: 12.w),
-              Stack(
-                clipBehavior: Clip.none,
+              Row(
                 children: [
-                  Icon(Icons.notifications_none_rounded,
-                      size: 32.sp, color: const Color(0xFF191919)),
-                  Positioned(
-                    right: 2.w,
-                    top: -2.h,
-                    child: Container(
-                      width: 10.w,
-                      height: 10.w,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFFE05555),
-                        shape: BoxShape.circle,
-                      ),
+                  CircleAvatar(
+                    radius: 24.r,
+                    backgroundImage: AssetImage(user.avatarUrl),
+                  ),
+                  SizedBox(width: 12.w),
+                  Text(
+                    'Hello, ${user.name}',
+                    style: AppTextStyles.header.copyWith(fontSize: 18.sp),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF4DA66B),
+                      borderRadius: BorderRadius.circular(36.r),
                     ),
+                    child: Text(
+                      'Earn ${user.earnAmount}',
+                      style: AppTextStyles.body.copyWith(color: Colors.white),
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Icon(Icons.notifications_none_rounded,
+                          size: 32.sp, color: const Color(0xFF191919)),
+                      if (user.notificationCount > 0)
+                        Positioned(
+                          right: 2.w,
+                          top: -2.h,
+                          child: Container(
+                            width: 10.w,
+                            height: 10.w,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFE05555),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ],
               ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
