@@ -32,7 +32,7 @@ class BalanceCard extends StatelessWidget {
         }
         // For demo, hardcode balance and currency
         final balance = '14 235,21';
-        final currency = 'DZD';
+        final currency = kDemoCurrency;
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           child: Container(

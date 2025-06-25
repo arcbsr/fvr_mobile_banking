@@ -5,6 +5,8 @@ import '../entities/card_entity.dart';
 import 'home_repository.dart';
 import 'package:flutter/material.dart';
 
+const String kDemoCurrency = 'DZD';
+
 class DemoHomeRepository implements HomeRepository {
   @override
   Future<User> getUser() async {
@@ -52,7 +54,7 @@ class DemoHomeRepository implements HomeRepository {
         ),
         cardholderName: 'Abdullah Mahmud',
         balance: '14,235.21',
-        currency: 'DZD',
+        currency: kDemoCurrency,
         cvv: '123',
       ),
       DemoCard(
@@ -67,7 +69,7 @@ class DemoHomeRepository implements HomeRepository {
         ),
         cardholderName: 'Sofia Rahman',
         balance: '8,900.00',
-        currency: 'DZD',
+        currency: kDemoCurrency,
         cvv: '456',
       ),
       DemoCard(
@@ -82,7 +84,7 @@ class DemoHomeRepository implements HomeRepository {
         ),
         cardholderName: 'Ali Hamlin',
         balance: '2,500.50',
-        currency: 'DZD',
+        currency: kDemoCurrency,
         cvv: '789',
       ),
       DemoCard(
@@ -97,7 +99,7 @@ class DemoHomeRepository implements HomeRepository {
         ),
         cardholderName: 'Mark Benson',
         balance: '5,100.00',
-        currency: 'DZD',
+        currency: kDemoCurrency,
         cvv: '321',
       ),
     ];
