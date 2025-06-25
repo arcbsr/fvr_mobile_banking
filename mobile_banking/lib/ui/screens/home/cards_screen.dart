@@ -6,6 +6,7 @@ import '../../components/mobix_card.dart';
 import 'card_details_screen.dart';
 import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
 import 'package:mobile_banking/domain/entities/card_entity.dart';
+import 'package:mobile_banking/l10n/app_localizations.dart';
 
 class CardsScreen extends StatefulWidget {
   const CardsScreen({super.key});
@@ -16,6 +17,8 @@ class CardsScreen extends StatefulWidget {
 
 class _CardsScreenState extends State<CardsScreen> {
   final _repo = DemoHomeRepository();
+  bool expanded = false;
+  int? lastCardIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,12 @@ class _CardsScreenState extends State<CardsScreen> {
           return Center(child: CircularProgressIndicator());
         }
         final cards = snapshot.data!;
+        // Always move the last tapped card to the last position in collapsed mode
+        List<DemoCard> orderedCards = List.from(cards);
+        if (!expanded && lastCardIndex != null) {
+          final card = orderedCards.removeAt(lastCardIndex!);
+          orderedCards.add(card);
+        }
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
@@ -35,18 +44,16 @@ class _CardsScreenState extends State<CardsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('My Cards', style: AppTextStyles.header.copyWith(fontSize: 22.sp)),
+                  Text(AppLocalizations.myCards, style: AppTextStyles.header.copyWith(fontSize: 22.sp)),
                   InkWell(
                     borderRadius: BorderRadius.circular(8.r),
                     onTap: () {},
                     child: Row(
                       children: [
                         Text(
-                          'Add card',
+                          AppLocalizations.addCard,
                           style: AppTextStyles.header.copyWith(
-                            fontSize: 18.sp,
                             color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         SizedBox(width: 8.w),
@@ -62,50 +69,79 @@ class _CardsScreenState extends State<CardsScreen> {
               ),
               SizedBox(height: 18.h),
               Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final availableHeight = constraints.maxHeight - 16.h;
-                    final n = cards.length;
-                    double cardHeight = 220.h;
-                    double cardOverlap = cardHeight * 0.25;
-                    double stackHeight = cardHeight + (n - 1) * cardOverlap;
-                    if (stackHeight > availableHeight) {
-                      cardHeight = availableHeight / (1 + 0.25 * (n - 1));
-                      cardOverlap = cardHeight * 0.25;
-                      stackHeight = cardHeight + (n - 1) * cardOverlap;
+                child: GestureDetector(
+                  onVerticalDragEnd: (details) {
+                    if (details.primaryVelocity != null && details.primaryVelocity! > 100) {
+                      // Swipe down to expand
+                      setState(() => expanded = true);
                     }
-                    return Align(
-                      alignment: Alignment.topCenter,
-                      child: SizedBox(
-                        height: stackHeight,
-                        child: Stack(
-                          children: [
-                            for (int i = 0; i < cards.length; i++)
-                              AnimatedPositioned(
-                                duration: const Duration(milliseconds: 350),
-                                curve: Curves.easeInOut,
-                                top: i * cardOverlap,
-                                left: 0,
-                                right: 0,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => CardDetailsScreen(card: cards[i]),
-                                      ),
-                                    );
-                                  },
-                                  child: SizedBox(
-                                    height: cardHeight,
-                                    child: MobixCard(card: cards[i]),
+                  },
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final availableHeight = constraints.maxHeight - 16.h;
+                      final n = orderedCards.length;
+                      double cardHeight = 220.h;
+                      double cardOverlap = cardHeight * 0.25;
+                      double stackHeight = cardHeight + (n - 1) * cardOverlap;
+                      if (stackHeight > availableHeight) {
+                        cardHeight = availableHeight / (1 + 0.25 * (n - 1));
+                        cardOverlap = cardHeight * 0.25;
+                        stackHeight = cardHeight + (n - 1) * cardOverlap;
+                      }
+                      return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 350),
+                        child: expanded
+                            ? ListView.builder(
+                                key: const ValueKey('expanded'),
+                                itemCount: orderedCards.length,
+                                itemBuilder: (context, i) => Padding(
+                                  padding: EdgeInsets.only(bottom: 16.h),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        expanded = false;
+                                        lastCardIndex = i;
+                                      });
+                                    },
+                                    child: MobixCard(card: orderedCards[i]),
+                                  ),
+                                ),
+                              )
+                            : Align(
+                                key: const ValueKey('collapsed'),
+                                alignment: Alignment.topCenter,
+                                child: SizedBox(
+                                  height: stackHeight,
+                                  child: Stack(
+                                    children: [
+                                      for (int i = 0; i < orderedCards.length; i++)
+                                        AnimatedPositioned(
+                                          duration: const Duration(milliseconds: 350),
+                                          curve: Curves.easeInOut,
+                                          top: i * cardOverlap,
+                                          left: 0,
+                                          right: 0,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) => CardDetailsScreen(card: orderedCards[i]),
+                                                ),
+                                              );
+                                            },
+                                            child: SizedBox(
+                                              height: cardHeight,
+                                              child: MobixCard(card: orderedCards[i]),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                 ),
                               ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

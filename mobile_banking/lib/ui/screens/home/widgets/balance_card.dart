@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_banking/core/theme/app_theme.dart';
 import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
 import 'package:mobile_banking/domain/entities/user_entity.dart';
+import 'package:mobile_banking/l10n/app_localizations.dart';
 
 class BalanceCard extends StatelessWidget {
   const BalanceCard({super.key});
@@ -55,7 +56,7 @@ class BalanceCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Main Balance',
+                        AppLocalizations.mainBalance,
                         style: AppTextStyles.body.copyWith(color: Colors.white.withOpacity(0.7)),
                       ),
                       SizedBox(height: 12.h),
@@ -99,7 +100,7 @@ class BalanceCard extends StatelessWidget {
                                 height: 28.w,
                                 color: Colors.white,
                               ),
-                              label: 'Top Up',
+                              label: AppLocalizations.topUp,
                               onTap: () {},
                             ),
                           ),
@@ -116,7 +117,7 @@ class BalanceCard extends StatelessWidget {
                                 height: 28.w,
                                 color: Colors.white,
                               ),
-                              label: 'Transfer',
+                              label: AppLocalizations.transfer,
                               onTap: () {},
                             ),
                           ),

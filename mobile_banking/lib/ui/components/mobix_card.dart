@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/theme/app_theme.dart';
 import 'package:mobile_banking/domain/entities/card_entity.dart';
+import 'package:mobile_banking/l10n/app_localizations.dart';
 
 class MobixCard extends StatelessWidget {
   final DemoCard card;
@@ -92,14 +93,14 @@ class MobixCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Valid Thru - ${card.expiry}',
+                      AppLocalizations.validThru + ' - ${card.expiry}',
                       style: AppTextStyles.body.copyWith(
                         color: Colors.white.withOpacity(0.7),
                       ),
                     ),
                     if (card.cvv != null && card.cvv.isNotEmpty)
                       Text(
-                        'CVV - ${card.cvv}',
+                        AppLocalizations.cvv + ' - ${card.cvv}',
                         style: AppTextStyles.body.copyWith(
                           color: Colors.white.withOpacity(0.7),
                         ),
@@ -108,7 +109,7 @@ class MobixCard extends StatelessWidget {
                 ),
                 SizedBox(height: 48.h),
                 Text(
-                  'Balance',
+                  AppLocalizations.balance,
                   style: AppTextStyles.body.copyWith(
                     color: Colors.white.withOpacity(0.7),
                     fontSize: 14.sp,
@@ -150,7 +151,12 @@ class MobixCard extends StatelessWidget {
                     Expanded(child: Container()),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: Icon(Icons.nfc, color: Colors.white, size: 28.sp),
+                      child: Image.asset(
+                        'assets/icons/ic_nfc.png',
+                        width: 28.w,
+                        height: 28.w,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),

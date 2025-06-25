@@ -11,7 +11,7 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       _NavBarItem(
-        iconPath: 'assets/icons/ic_card.png',
+        iconPath: 'assets/icons/ic_home.png',
         label: 'Home',
         selected: currentIndex == 0,
         onTap: () => onTap(0),
@@ -23,7 +23,7 @@ class BottomNavBar extends StatelessWidget {
         onTap: () => onTap(1),
       ),
       _NavBarItem(
-        iconPath: 'assets/icons/ic_card.png',
+        iconPath: 'assets/icons/ic_home.png',
         label: 'Scan',
         selected: currentIndex == 2,
         onTap: () => onTap(2),
