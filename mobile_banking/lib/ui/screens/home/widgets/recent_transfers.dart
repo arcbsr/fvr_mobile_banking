@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
-import 'package:mobile_banking/core/theme/app_theme.dart';
-import 'package:mobile_banking/domain/entities/beneficiary_entity.dart';
-import 'package:mobile_banking/l10n/app_localizations.dart';
+import 'package:moix_app/domain/repositories/demo_home_repository.dart';
+import 'package:moix_app/core/theme/app_theme.dart';
+import 'package:moix_app/domain/entities/beneficiary_entity.dart';
+import 'package:moix_app/l10n/app_localizations.dart';
 
 class RecentTransfers extends StatelessWidget {
   RecentTransfers({super.key});

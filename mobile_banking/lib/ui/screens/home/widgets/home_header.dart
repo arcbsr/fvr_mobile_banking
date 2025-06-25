@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
-import 'package:mobile_banking/core/theme/app_theme.dart';
-import 'package:mobile_banking/ui/screens/settings/language_settings_screen.dart';
+import 'package:moix_app/domain/repositories/demo_home_repository.dart';
+import 'package:moix_app/core/theme/app_theme.dart';
+import 'package:moix_app/ui/screens/settings/language_settings_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class HomeHeader extends StatelessWidget {

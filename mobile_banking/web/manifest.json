@@ -1,6 +1,6 @@
 {
-    "name": "mobile_banking",
-    "short_name": "mobile_banking",
+    "name": "moix_app",
+    "short_name": "moix_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

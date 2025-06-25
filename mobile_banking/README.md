@@ -1,4 +1,4 @@
-# mobile_banking
+# moix_app
 
 A new Flutter project.
 

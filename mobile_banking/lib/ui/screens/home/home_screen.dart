@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 HomeHeader(),
                 const BalanceCard(),
                 SizedBox(
-                  height: 160.h,
+                  height: 166.h,
                   child: RecentTransfers(),
                 ),
                 SizedBox(height: 16.h),

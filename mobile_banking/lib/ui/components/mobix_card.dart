@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/theme/app_theme.dart';
-import 'package:mobile_banking/domain/entities/card_entity.dart';
-import 'package:mobile_banking/l10n/app_localizations.dart';
+import 'package:moix_app/domain/entities/card_entity.dart';
+import 'package:moix_app/l10n/app_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class MobixCard extends StatelessWidget {
