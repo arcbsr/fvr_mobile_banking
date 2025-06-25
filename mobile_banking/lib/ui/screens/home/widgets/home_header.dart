@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
 import 'package:mobile_banking/core/theme/app_theme.dart';
+import 'package:mobile_banking/ui/screens/settings/language_settings_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeHeader extends StatelessWidget {
   HomeHeader({super.key});
@@ -25,13 +27,13 @@ class HomeHeader extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    radius: 24.r,
+                    radius: 18.r,
                     backgroundImage: AssetImage(user.avatarUrl),
                   ),
                   SizedBox(width: 12.w),
                   Text(
-                    'Hello, ${user.name}',
-                    style: AppTextStyles.header.copyWith(fontSize: 18.sp),
+                    'helloUser'.tr(namedArgs: {'name': user.name}),
+                    style: AppTextStyles.title,
                   ),
                 ],
               ),
@@ -44,30 +46,40 @@ class HomeHeader extends StatelessWidget {
                       borderRadius: BorderRadius.circular(36.r),
                     ),
                     child: Text(
-                      'Earn ${user.earnAmount}',
+                      'earnAmount'.tr(namedArgs: {'amount': user.earnAmount.toString()}),
                       style: AppTextStyles.body.copyWith(color: Colors.white),
                     ),
                   ),
-                  SizedBox(width: 12.w),
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Icon(Icons.notifications_none_rounded,
-                          size: 32.sp, color: const Color(0xFF191919)),
-                      if (user.notificationCount > 0)
-                        Positioned(
-                          right: 2.w,
-                          top: -2.h,
-                          child: Container(
-                            width: 10.w,
-                            height: 10.w,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFE05555),
-                              shape: BoxShape.circle,
+                  SizedBox(width: 8.w),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LanguageSettingsScreen(),
+                        ),
+                      );
+                    },
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Icon(Icons.notifications_none_rounded,
+                            size: 32.sp, color: const Color(0xFF191919)),
+                        if (user.notificationCount > 0)
+                          Positioned(
+                            right: 2.w,
+                            top: -2.h,
+                            child: Container(
+                              width: 10.w,
+                              height: 10.w,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFE05555),
+                                shape: BoxShape.circle,
+                              ),
                             ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

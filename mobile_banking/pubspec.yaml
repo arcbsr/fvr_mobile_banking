@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^6.2.0
   flutter_screenutil: ^5.9.3
   stacked_card_carousel: ^0.0.4
+  easy_localization: ^3.0.7+1
 
 dev_dependencies:
   flutter_test:
@@ -95,3 +96,4 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/translations/

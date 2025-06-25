@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
 import 'package:mobile_banking/core/theme/app_theme.dart';
 import 'package:mobile_banking/domain/entities/transaction_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LatestTransactions extends StatelessWidget {
   LatestTransactions({super.key});
@@ -22,12 +23,12 @@ class LatestTransactions extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-              child: Text('Latest Transactions', style: AppTextStyles.header.copyWith(fontSize: 18.sp)),
+              child: Text('latestTransactions'.tr(), style: AppTextStyles.header.copyWith(fontSize: 18.sp)),
             ),
             Expanded(
               child: ListView.separated(
                 itemCount: transactions.length,
-                separatorBuilder: (_, __) => SizedBox(height: 0.h),
+                separatorBuilder: (_, __) => SizedBox(height: 14.h),
                 itemBuilder: (context, index) {
                   final tx = transactions[index];
                   return Container(

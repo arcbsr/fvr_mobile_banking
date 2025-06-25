@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../components/mobix_card.dart';
 import '../../../core/theme/app_theme.dart';
 import 'package:mobile_banking/domain/entities/card_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CardDetailsScreen extends StatelessWidget {
   final DemoCard card;
@@ -42,7 +43,7 @@ class CardDetailsScreen extends StatelessWidget {
                         Icon(Icons.nfc, color: Colors.grey[400], size: 48.sp),
                         SizedBox(height: 8.h),
                         Text(
-                          'Move near a device to pay',
+                          'moveToPay'.tr(),
                           style: AppTextStyles.body.copyWith(
                             color: Colors.grey[400],
                             fontSize: 16.sp,
@@ -60,30 +61,30 @@ class CardDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Card Options', style: AppTextStyles.header.copyWith(fontSize: 16.sp)),
+                        Text('cardOptions'.tr(), style: AppTextStyles.header.copyWith(fontSize: 16.sp)),
                         SizedBox(height: 16.h),
                         _CardOption(
                           icon: Icons.attach_money,
                           iconBg: const Color(0xFFE6F4EA),
                           iconColor: const Color(0xFF4DA66B),
-                          title: 'Top Up Card',
-                          subtitle: 'Choose the available Top Up method',
+                          title: 'topUpCard'.tr(),
+                          subtitle: 'chooseTopUp'.tr(),
                         ),
                         SizedBox(height: 16.h),
                         _CardOption(
                           icon: Icons.bar_chart,
                           iconBg: const Color(0xFFFDEEEF),
                           iconColor: const Color(0xFFF37C7B),
-                          title: 'Limits',
-                          subtitle: 'Check your Mobix Cards payment limits',
+                          title: 'limits'.tr(),
+                          subtitle: 'checkLimits'.tr(),
                         ),
                         SizedBox(height: 16.h),
                         _CardOption(
                           icon: Icons.warning_amber_rounded,
                           iconBg: const Color(0xFFF2F0FE),
                           iconColor: const Color(0xFF6F45E9),
-                          title: 'Freeze Card',
-                          subtitle: 'Lost your card? Let\'s activate the panic button',
+                          title: 'freezeCard'.tr(),
+                          subtitle: 'lostCard'.tr(),
                         ),
                         SizedBox(height: 64.h),
                       ],

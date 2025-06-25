@@ -7,6 +7,7 @@ import 'card_details_screen.dart';
 import 'package:mobile_banking/domain/repositories/demo_home_repository.dart';
 import 'package:mobile_banking/domain/entities/card_entity.dart';
 import 'package:mobile_banking/l10n/app_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CardsScreen extends StatefulWidget {
   const CardsScreen({super.key});
@@ -244,7 +245,7 @@ class _CardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Valid Thru - ${card.expiry}',
+                      'validThru'.tr(namedArgs: {'expiry': card.expiry}),
                       style: AppTextStyles.body.copyWith(
                         color: Colors.white.withOpacity(0.7),
                         fontSize: 13.sp,
@@ -326,8 +327,11 @@ class _CardDetailsSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _CardActionButton(label: 'Top Up', icon: Icons.arrow_downward, onTap: () {}),
+              _CardActionButton(label: 'topUp'.tr(), icon: Icons.arrow_downward, onTap: () {}),
               _CardActionButton(label: 'Freeze', icon: Icons.ac_unit, onTap: () {}),
+              _CardActionButton(label: 'freeze'.tr(), icon: Icons.ac_unit, onTap: () {}),
               _CardActionButton(label: 'Details', icon: Icons.info_outline, onTap: () {}),
+              _CardActionButton(label: 'details'.tr(), icon: Icons.info_outline, onTap: () {}),
             ],
           ),
         ],

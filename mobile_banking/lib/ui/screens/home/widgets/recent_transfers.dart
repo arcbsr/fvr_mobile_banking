@@ -42,30 +42,33 @@ class RecentTransfers extends StatelessWidget {
               SizedBox(height: 12.h),
               SizedBox(
                 height: 90.h,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: beneficiaries.length + 1,
-                  separatorBuilder: (_, __) => SizedBox(width: 12.w),
-                  itemBuilder: (context, index) {
-                    if (index == 0) {
-                      return _AddBeneficiary();
-                    }
-                    final b = beneficiaries[index - 1];
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: 28.r,
-                          backgroundImage: AssetImage(b.avatarUrl),
-                        ),
-                        SizedBox(height: 8.h),
-                        Text(
-                          b.name,
-                          style: AppTextStyles.body.copyWith(fontSize: 13.sp),
-                        ),
-                      ],
-                    );
-                  },
+                child: Padding(
+                  padding: EdgeInsets.only(right: 16.w),
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: beneficiaries.length + 1,
+                    separatorBuilder: (_, __) => SizedBox(width: 12.w),
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        return _AddBeneficiary();
+                      }
+                      final b = beneficiaries[index - 1];
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: 28.r,
+                            backgroundImage: AssetImage(b.avatarUrl),
+                          ),
+                          SizedBox(height: 8.h),
+                          Text(
+                            b.name,
+                            style: AppTextStyles.body.copyWith(fontSize: 13.sp),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
@@ -82,23 +85,16 @@ class _AddBeneficiary extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: 56.w,
-          height: 56.w,
-          decoration: BoxDecoration(
-            color: const Color(0xFFE6DDFF),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(Icons.add, color: const Color(0xFF6F45E9), size: 28.sp),
+        CircleAvatar(
+          radius: 28.r,
+          backgroundColor: const Color(0xFFE6DDFF),
+          child: Icon(Icons.add, color: const Color(0xFF6F45E9), size: 28.r),
         ),
         SizedBox(height: 8.h),
-        SizedBox(
-          width: 56.w,
-          child: Text(
-            AppLocalizations.addCard,
-            style: AppTextStyles.caption,
-            textAlign: TextAlign.center,
-          ),
+        Text(
+          AppLocalizations.addCard,
+          style: AppTextStyles.body.copyWith(fontSize: 13.sp),
+          textAlign: TextAlign.center,
         ),
       ],
     );

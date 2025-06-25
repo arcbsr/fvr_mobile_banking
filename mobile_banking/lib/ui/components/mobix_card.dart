@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/theme/app_theme.dart';
 import 'package:mobile_banking/domain/entities/card_entity.dart';
 import 'package:mobile_banking/l10n/app_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MobixCard extends StatelessWidget {
   final DemoCard card;
@@ -12,7 +13,7 @@ class MobixCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       decoration: BoxDecoration(
         gradient: card.gradient,
         borderRadius: BorderRadius.circular(24.r),
@@ -93,7 +94,7 @@ class MobixCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppLocalizations.validThru + ' - ${card.expiry}',
+                      'validThru'.tr(namedArgs: {'expiry': card.expiry}),
                       style: AppTextStyles.body.copyWith(
                         color: Colors.white.withOpacity(0.7),
                       ),
@@ -131,14 +132,15 @@ class MobixCard extends StatelessWidget {
                         card.balance,
                         style: AppTextStyles.title.copyWith(
                           color: Colors.white,
-                          fontSize: 20.sp,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                     SizedBox(width: 6.w),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 2.h),
+                    Baseline(
+                      baseline: 20.sp,
+                      baselineType: TextBaseline.alphabetic,
                       child: Text(
                         card.currency,
                         style: AppTextStyles.body.copyWith(
