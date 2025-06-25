@@ -82,7 +82,7 @@ class MobixCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 18.h),
                 Text(
                   card.cardholderName,
                   style: AppTextStyles.title.copyWith(
@@ -111,7 +111,7 @@ class MobixCard extends StatelessWidget {
                       ),
                   ],
                 ),
-                SizedBox(height: 48.h),
+                SizedBox(height: 32.h),
                 Text(
                   AppLocalizations.balance,
                   style: AppTextStyles.body.copyWith(

@@ -24,15 +24,16 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
 .dart_tool/
+.packages
+.pub/
+.pub-cache/
+build/
+**/build/
 .flutter-plugins
 .flutter-plugins-dependencies
-.packages
-.pub-cache/
-.pub/
-/build/
+.flutter-versions
+.melos_tool/
 
 # Symbolication related
 app.*.symbols
@@ -44,3 +45,99 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# VS Code related
+.vscode/
+
+# Xcode related
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata
+*.xcodeproj
+*.xcconfig
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcsettings
+DerivedData/
+Pods/
+Flutter/
+
+# Android related
+*.apk
+*.ap_*
+*.dex
+*.class
+*.jar
+*.keystore
+*.jks
+*.so
+*.o
+*.a
+*.d
+*.hprof
+*.DS_Store
+android/local.properties
+android/key.properties
+
+# macOS related
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata
+*.xcodeproj
+*.xcconfig
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcsettings
+DerivedData/
+Pods/
+Flutter/
+
+# Linux related
+linux/flutter/ephemeral/
+
+# Windows related
+windows/flutter/ephemeral/
+
+# Web related
+web/.dart_tool/
+web/build/
+
+# CocoaPods
+ios/Pods/
+macos/Pods/
+
+# SPM build
+.build/
+
+# Others
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Ignore generated files by Flutter
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.melos_tool/
+
+# Ignore test outputs
+coverage/
+
+# Ignore by default for security
+.env
+.env.*
+
+# Ignore SPM build directories
+.swiftpm/
+
+# Ignore Xcode workspace settings
+xcuserdata/
+
+# Ignore SwiftPM build directory
+.build/
