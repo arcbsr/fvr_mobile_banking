@@ -35,5 +35,11 @@
   "sendFeedback": "Envoyer des commentaires",
   "aboutMobix": "À propos de Mobix",
   "deleteAccount": "Supprimer le compte",
-  "logout": "Se déconnecter"
+  "logout": "Se déconnecter",
+  "scan_qrCode": "QR Code",
+  "scan_fastPayments": "Paiements rapides avec un simple scan",
+  "scan_scanQrCode": "Scanner le QR Code",
+  "scan_pointScanPay": "Pointer, scanner et payer",
+  "scan_myQrCode": "Mon QR Code",
+  "scan_showQrToGetPaid": "Montrez ce QR Code pour être payé"
 } 

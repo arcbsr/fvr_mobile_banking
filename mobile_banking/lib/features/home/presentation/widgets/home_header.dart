@@ -24,18 +24,22 @@ class HomeHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 18.r,
-                    backgroundImage: AssetImage(user.avatarUrl),
-                  ),
-                  SizedBox(width: 12.w),
-                  Text(
-                    'helloUser'.tr(namedArgs: {'name': user.name}),
-                    style: AppTextStyles.title,
-                  ),
-                ],
+              Flexible(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 18.r,
+                      backgroundImage: AssetImage(user.avatarUrl),
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      'helloUser'.tr(namedArgs: {'name': user.name}),
+                      style: AppTextStyles.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
               ),
               Row(
                 children: [
