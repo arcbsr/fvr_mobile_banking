@@ -12,16 +12,22 @@ class AppTheme {
 
 class AppTextStyles {
 
+  static TextStyle get extraHeader => TextStyle(
+        fontFamily: 'Nunito',
+        fontWeight: FontWeight.w800,
+        fontSize: 24.sp,
+        color: const Color(0xFF191919),
+      );
   static TextStyle get header => TextStyle(
         fontFamily: 'Nunito',
         fontWeight: FontWeight.w800,
-        fontSize: 16.sp,
+        fontSize: 18.sp,
         color: const Color(0xFF191919),
       );
   static TextStyle get title => TextStyle(
         fontFamily: 'Nunito',
-        fontWeight: FontWeight.w800,
-        fontSize: 16.sp,
+        fontWeight: FontWeight.w700,
+        fontSize: 14.sp,
         color: const Color(0xFF191919),
       );
   static TextStyle get body => TextStyle(
@@ -33,7 +39,7 @@ class AppTextStyles {
   static TextStyle get caption => TextStyle(
         fontFamily: 'Nunito',
         fontWeight: FontWeight.w400,
-        fontSize: 14.sp,
+        fontSize: 13.sp,
         color: const Color(0xFF191919),
       );
   static TextStyle get button => TextStyle(

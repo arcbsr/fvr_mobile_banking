@@ -65,32 +65,20 @@ class MobixCard extends StatelessWidget {
                         SizedBox(width: 12.w),
                         Text(
                           card.type,
-                          style: AppTextStyles.title.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: AppTextStyles.title.copyWith(color: Colors.white),
                         ),
                       ],
                     ),
                     Text(
                       card.maskedNumber,
-                      style: AppTextStyles.title.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1.5,
-                      ),
+                      style: AppTextStyles.title.copyWith(color: Colors.white),
                     ),
                   ],
                 ),
                 SizedBox(height: 18.h),
                 Text(
                   card.cardholderName,
-                  style: AppTextStyles.title.copyWith(
-                    color: Colors.white,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.2,
-                  ),
+                  style: AppTextStyles.body.copyWith(color: Colors.white, fontSize: 18.sp),
                 ),
                 SizedBox(height: 2.h),
                 Row(
@@ -98,26 +86,19 @@ class MobixCard extends StatelessWidget {
                   children: [
                     Text(
                       'validThru'.tr(namedArgs: {'expiry': card.expiry}),
-                      style: AppTextStyles.body.copyWith(
-                        color: Colors.white.withOpacity(0.7),
-                      ),
+                      style: AppTextStyles.body.copyWith(color: Colors.white.withOpacity(0.7)),
                     ),
                     if (card.cvv != null && card.cvv.isNotEmpty)
                       Text(
                         AppLocalizations.cvv + ' - ${card.cvv}',
-                        style: AppTextStyles.body.copyWith(
-                          color: Colors.white.withOpacity(0.7),
-                        ),
+                        style: AppTextStyles.body.copyWith(color: Colors.white.withOpacity(0.7)),
                       ),
                   ],
                 ),
                 SizedBox(height: 32.h),
                 Text(
                   AppLocalizations.balance,
-                  style: AppTextStyles.body.copyWith(
-                    color: Colors.white.withOpacity(0.7),
-                    fontSize: 14.sp,
-                  ),
+                  style: AppTextStyles.body.copyWith(color: Colors.white.withOpacity(0.7)),
                 ),
                 SizedBox(height: 2.h),
                 Row(
@@ -133,11 +114,7 @@ class MobixCard extends StatelessWidget {
                       baselineType: TextBaseline.alphabetic,
                       child: Text(
                         card.balance,
-                        style: AppTextStyles.title.copyWith(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: AppTextStyles.title.copyWith(color: Colors.white, fontSize: 18.sp),
                       ),
                     ),
                     SizedBox(width: 6.w),
@@ -146,11 +123,7 @@ class MobixCard extends StatelessWidget {
                       baselineType: TextBaseline.alphabetic,
                       child: Text(
                         card.currency,
-                        style: AppTextStyles.body.copyWith(
-                          color: Colors.white,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                        ),
+                        style: AppTextStyles.body.copyWith(color: Colors.white),
                       ),
                     ),
                     Expanded(child: Container()),

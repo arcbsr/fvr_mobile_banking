@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
+import '../../../../core/theme/app_theme.dart';
 
 class ScanScreen extends StatelessWidget {
   const ScanScreen({super.key});
@@ -21,20 +22,12 @@ class ScanScreen extends StatelessWidget {
                 children: [
                   Text(
                     'scan_qrCode'.tr(),
-                    style: TextStyle(
-                      fontSize: 26.sp,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.black,
-                    ),
+                    style: AppTextStyles.header,
                   ),
                   SizedBox(height: 6.h),
                   Text(
                     'scan_fastPayments'.tr(),
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      color: const Color(0xFF8A939B),
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: AppTextStyles.body,
                   ),
                 ],
               ),
@@ -165,19 +158,11 @@ class _ScanActionCard extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 16.sp,
-            color: Colors.black,
-          ),
+          style: AppTextStyles.title,
         ),
         subtitle: Text(
           subtitle,
-          style: TextStyle(
-            fontSize: 13.sp,
-            color: const Color(0xFF8A939B),
-            fontWeight: FontWeight.w400,
-          ),
+          style: AppTextStyles.caption,
         ),
         trailing: Icon(Icons.chevron_right_rounded, color: Colors.grey[400], size: 22.sp),
         onTap: onTap,

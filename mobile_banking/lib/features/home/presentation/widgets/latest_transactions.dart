@@ -26,7 +26,7 @@ class LatestTransactions extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('latestTransactions'.tr(), style: AppTextStyles.header.copyWith(fontSize: 18.sp)),
+                  Text('latestTransactions'.tr(), style: AppTextStyles.header),
                   TextButton(
                     onPressed: () {
                       // TODO: Implement view all action
@@ -80,19 +80,19 @@ class LatestTransactions extends StatelessWidget {
                             children: [
                               Text(
                                 tx.title,
-                                style: AppTextStyles.title.copyWith(fontWeight: FontWeight.w600),
+                                style: AppTextStyles.title,
                               ),
                               SizedBox(height: 2.h),
                               Row(
                                 children: [
                                   Text(
                                     tx.date,
-                                    style: AppTextStyles.caption.copyWith(color: const Color(0xFF78838D)),
+                                    style: AppTextStyles.caption,
                                   ),
                                   SizedBox(width: 4.w),
                                   Text(
                                     tx.time,
-                                    style: AppTextStyles.caption.copyWith(color: const Color(0xFF78838D)),
+                                    style: AppTextStyles.caption,
                                   ),
                                 ],
                               ),
@@ -106,7 +106,6 @@ class LatestTransactions extends StatelessWidget {
                             Text(
                               tx.amount,
                               style: AppTextStyles.body.copyWith(
-                                fontWeight: FontWeight.w600,
                                 color: tx.isCredit ? const Color(0xFF4DA66B) : const Color(0xFFB83232),
                               ),
                             ),

@@ -41,5 +41,15 @@
   "scan_scanQrCode": "Scanner le QR Code",
   "scan_pointScanPay": "Pointer, scanner et payer",
   "scan_myQrCode": "Mon QR Code",
-  "scan_showQrToGetPaid": "Montrez ce QR Code pour être payé"
+  "scan_showQrToGetPaid": "Montrez ce QR Code pour être payé",
+  "topUpRequest": "Demande de recharge",
+  "actions": "Actions",
+  "newTransfer": "Nouveau transfert",
+  "newTransferDesc": "Effectuer un nouveau transfert à vos amis ou à votre famille",
+  "requestMoney": "Demander de l'argent",
+  "requestMoneyDesc": "Demander de l'argent à vos amis / famille",
+  "sentRequest": "Demande envoyée",
+  "sentRequestDesc": "Demande d'argent que vous avez envoyée",
+  "receivedRequest": "Demande reçue",
+  "receivedRequestDesc": "Historique des demandes d'argent reçues"
 } 

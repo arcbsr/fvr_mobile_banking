@@ -103,3 +103,5 @@ const testingTestingGuidelines = `
 6. Follow proper test naming conventions
 7. Implement proper CI/CD testing
 `;
+
+// RULE: All text in the project must use AppTextStyles from app_theme.dart without overriding font size, weight, or family. Only .copyWith(color: ...) is allowed for contrast or emphasis.

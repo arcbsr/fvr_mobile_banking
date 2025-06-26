@@ -28,7 +28,7 @@ class RecentTransfers extends StatelessWidget {
                 children: [
                   Text(
                     AppLocalizations.recentTransfers,
-                    style: AppTextStyles.title,
+                    style: AppTextStyles.header,
                   ),
                   TextButton(
                     onPressed: () {},

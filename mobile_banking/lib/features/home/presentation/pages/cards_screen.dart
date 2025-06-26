@@ -53,7 +53,7 @@ class _CardsScreenState extends State<CardsScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(AppLocalizations.myCards, style: AppTextStyles.header.copyWith(fontSize: 22.sp)),
+                    Text(AppLocalizations.myCards, style: AppTextStyles.header),
                     InkWell(
                       borderRadius: BorderRadius.circular(8.r),
                       onTap: () {},
@@ -61,9 +61,7 @@ class _CardsScreenState extends State<CardsScreen> {
                         children: [
                           Text(
                             AppLocalizations.addCard,
-                            style: AppTextStyles.header.copyWith(
-                              color: Theme.of(context).primaryColor,
-                            ),
+                            style: AppTextStyles.header,
                           ),
                           SizedBox(width: 8.w),
                           Icon(
@@ -216,35 +214,21 @@ class _CardWidget extends StatelessWidget {
                         SizedBox(width: 8.w),
                         Text(
                           card.type,
-                          style: AppTextStyles.header.copyWith(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: AppTextStyles.header.copyWith(color: Colors.white),
                         ),
                         // Optionally, add a card tier or other info if available in DemoCard
                       ],
                     ),
                     Text(
                       card.maskedNumber,
-                      style: AppTextStyles.header.copyWith(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1.5,
-                      ),
+                      style: AppTextStyles.header.copyWith(color: Colors.white),
                     ),
                   ],
                 ),
                 SizedBox(height: 18.h),
                 Text(
                   card.cardholderName,
-                  style: AppTextStyles.header.copyWith(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.2,
-                  ),
+                  style: AppTextStyles.header.copyWith(color: Colors.white),
                 ),
                 SizedBox(height: 6.h),
                 Row(

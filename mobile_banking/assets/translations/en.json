@@ -41,5 +41,15 @@
   "scan_scanQrCode": "Scan QR Code",
   "scan_pointScanPay": "Point, Scan and pay",
   "scan_myQrCode": "My QR Code",
-  "scan_showQrToGetPaid": "Show this QR Code to Get Paid"
+  "scan_showQrToGetPaid": "Show this QR Code to Get Paid",
+  "topUpRequest": "Top Up Request",
+  "actions": "Actions",
+  "newTransfer": "New Transfer",
+  "newTransferDesc": "Make new transfer to your Friends or family",
+  "requestMoney": "Request Money",
+  "requestMoneyDesc": "Request money from your Friends / Family",
+  "sentRequest": "Sent Request",
+  "sentRequestDesc": "Money request you have sent",
+  "receivedRequest": "Received Request",
+  "receivedRequestDesc": "Your received money request history"
 } 

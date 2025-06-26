@@ -66,24 +66,21 @@ class BalanceCard extends StatelessWidget {
                         children: [
                           Icon(Icons.remove_red_eye_outlined, color: Colors.white, size: 20.sp),
                           SizedBox(width: 12.w),
-                          Text(
-                            balance,
-                            style: AppTextStyles.title.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 32.sp,
+                          Baseline(
+                            baseline: 32.sp,
+                            baselineType: TextBaseline.alphabetic,
+                            child: Text(
+                              balance,
+                              style: AppTextStyles.extraHeader.copyWith(color: Colors.white),
                             ),
                           ),
                           SizedBox(width: 12.w),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 8.h),
+                          Baseline(
+                            baseline: 32.sp,
+                            baselineType: TextBaseline.alphabetic,
                             child: Text(
                               currency,
-                              style: AppTextStyles.body.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18.sp,
-                              ),
+                              style: AppTextStyles.body.copyWith(color: Colors.white),
                             ),
                           ),
                         ],

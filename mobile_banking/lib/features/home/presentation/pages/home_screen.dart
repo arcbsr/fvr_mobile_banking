@@ -8,6 +8,7 @@ import 'cards_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../settings/presentation/pages/more_screen.dart';
 import 'scan_screen.dart';
+import 'transfer_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,9 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
             // Cards page
             const CardsScreen(),
             // Scan page
-            const ScanScreen(),
-            // Placeholder for Transfer
-            Center(child: Text('Transfer', style: TextStyle(fontSize: 24))),
+            ScanScreen(),
+            // Transfer page
+            TransferScreen(),
             // More page
             MoreScreen(),
           ],
