@@ -20,7 +20,7 @@ class AppTextStyles {
       );
   static TextStyle get header => TextStyle(
         fontFamily: 'Nunito',
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w700,
         fontSize: 18.sp,
         color: const Color(0xFF191919),
       );

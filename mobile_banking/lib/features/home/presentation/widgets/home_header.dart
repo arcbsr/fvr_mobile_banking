@@ -34,7 +34,7 @@ class HomeHeader extends StatelessWidget {
                     SizedBox(width: 12.w),
                     Text(
                       'helloUser'.tr(namedArgs: {'name': user.name}),
-                      style: AppTextStyles.title,
+                      style: AppTextStyles.header,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),

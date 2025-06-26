@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 166.h,
                   child: RecentTransfers(),
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 10.h),
                 Expanded(child: LatestTransactions()),
               ],
             ),

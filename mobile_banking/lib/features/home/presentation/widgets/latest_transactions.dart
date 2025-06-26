@@ -105,7 +105,7 @@ class LatestTransactions extends StatelessWidget {
                           children: [
                             Text(
                               tx.amount,
-                              style: AppTextStyles.body.copyWith(
+                              style: AppTextStyles.title.copyWith(
                                 color: tx.isCredit ? const Color(0xFF4DA66B) : const Color(0xFFB83232),
                               ),
                             ),

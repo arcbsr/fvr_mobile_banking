@@ -114,7 +114,7 @@ class MobixCard extends StatelessWidget {
                       baselineType: TextBaseline.alphabetic,
                       child: Text(
                         card.balance,
-                        style: AppTextStyles.title.copyWith(color: Colors.white, fontSize: 18.sp),
+                        style: AppTextStyles.title.copyWith(color: Colors.white, fontSize: 20.sp),
                       ),
                     ),
                     SizedBox(width: 6.w),
