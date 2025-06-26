@@ -81,11 +81,11 @@ class _NavBarItem extends StatelessWidget {
           children: [
             Image.asset(
               iconPath,
-              width: 22.w,
-              height: 22.w,
+              width: 28.w,
+              height: 28.w,
               color: iconColor,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 4.h),
             Text(
               label,
               style: AppTextStyles.caption.copyWith(

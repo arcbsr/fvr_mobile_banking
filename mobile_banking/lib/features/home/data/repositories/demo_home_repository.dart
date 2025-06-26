@@ -37,6 +37,10 @@ class DemoHomeRepository implements HomeRepository {
       Transaction(title: 'Top Up', date: 'Yesterday', time: '12:32', amount: '+430.00 DZD', isCredit: true, logoUrl: 'assets/icons/logo_walmart.png'),
       Transaction(title: 'Netflix', date: 'Dec 24', time: '12:32', amount: '-35.23 DZD', isCredit: false, logoUrl: 'assets/icons/logo_walmart.png'),
       Transaction(title: 'Top Up', date: '24 Jan', time: '12:32', amount: '+1,504.00 DZD', isCredit: true, logoUrl: 'assets/icons/logo_walmart.png'),
+      Transaction(title: 'Walmart', date: 'Today', time: '12:32', amount: '-35.23 DZD', isCredit: false, logoUrl: 'assets/icons/logo_walmart.png'),
+      Transaction(title: 'Top Up', date: 'Yesterday', time: '12:32', amount: '+430.00 DZD', isCredit: true, logoUrl: 'assets/icons/logo_walmart.png'),
+      Transaction(title: 'Netflix', date: 'Dec 24', time: '12:32', amount: '-35.23 DZD', isCredit: false, logoUrl: 'assets/icons/logo_walmart.png'),
+      Transaction(title: 'Top Up', date: '24 Jan', time: '12:32', amount: '+1,504.00 DZD', isCredit: true, logoUrl: 'assets/icons/logo_walmart.png'),
     ];
   }
 

@@ -64,7 +64,11 @@ class BalanceCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(Icons.remove_red_eye_outlined, color: Colors.white, size: 20.sp),
+                          Baseline(
+                            baseline: 32.sp,
+                            baselineType: TextBaseline.alphabetic,
+                            child: Icon(Icons.remove_red_eye_outlined, color: Colors.white, size: 20.sp),
+                          ),
                           SizedBox(width: 12.w),
                           Baseline(
                             baseline: 32.sp,
