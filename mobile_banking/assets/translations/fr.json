@@ -25,5 +25,15 @@
   "lostCard": "Carte perdue ? Appuyez sur le bouton panique",
   "latestTransactions": "Dernières transactions",
   "freeze": "Geler",
-  "details": "Détails"
+  "details": "Détails",
+  "myAccount": "Mon compte",
+  "openBusinessAccount": "Ouvrir un compte professionnel GRATUITEMENT",
+  "helpAndSettings": "Aide & Paramètres",
+  "changeLanguage": "Changer de langue",
+  "privacySecurity": "Confidentialité & Sécurité",
+  "contactSupport": "Contacter le support",
+  "sendFeedback": "Envoyer des commentaires",
+  "aboutMobix": "À propos de Mobix",
+  "deleteAccount": "Supprimer le compte",
+  "logout": "Se déconnecter"
 } 

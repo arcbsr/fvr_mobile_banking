@@ -25,5 +25,15 @@
   "lostCard": "Lost your card? Let's activate the panic button",
   "latestTransactions": "Latest Transactions",
   "freeze": "Freeze",
-  "details": "Details"
+  "details": "Details",
+  "myAccount": "My Account",
+  "openBusinessAccount": "Open a Business Account for FREE",
+  "helpAndSettings": "Help & Settings",
+  "changeLanguage": "Change Language",
+  "privacySecurity": "Privacy & Security",
+  "contactSupport": "Contact Support",
+  "sendFeedback": "Send Feedback",
+  "aboutMobix": "About Mobix",
+  "deleteAccount": "Delete Account",
+  "logout": "Logout"
 } 

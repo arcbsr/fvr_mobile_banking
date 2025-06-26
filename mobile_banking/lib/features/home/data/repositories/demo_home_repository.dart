@@ -15,6 +15,7 @@ class DemoHomeRepository implements HomeRepository {
       avatarUrl: 'assets/icons/avatar.png',
       earnAmount: '300 DZD',
       notificationCount: 1,
+      phoneNumber: '+213 5555412943',
     );
   }
 
