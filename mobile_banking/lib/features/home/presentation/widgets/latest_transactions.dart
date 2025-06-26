@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:moix_app/domain/repositories/demo_home_repository.dart';
+import '../../data/repositories/demo_home_repository.dart';
 import 'package:moix_app/core/theme/app_theme.dart';
-import 'package:moix_app/domain/entities/transaction_entity.dart';
+import '../../domain/entities/transaction_entity.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class LatestTransactions extends StatelessWidget {

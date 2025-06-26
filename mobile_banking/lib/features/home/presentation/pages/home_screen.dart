@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'widgets/home_header.dart';
-import 'widgets/balance_card.dart';
-import 'widgets/recent_transfers.dart';
-import 'widgets/latest_transactions.dart';
-import 'widgets/bottom_nav_bar.dart';
+import '../widgets/home_header.dart';
+import '../widgets/balance_card.dart';
+import '../widgets/recent_transfers.dart';
+import '../widgets/latest_transactions.dart';
+import '../widgets/bottom_nav_bar.dart';
 import 'cards_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

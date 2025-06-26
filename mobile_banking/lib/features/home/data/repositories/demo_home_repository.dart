@@ -1,8 +1,8 @@
-import '../entities/user_entity.dart';
-import '../entities/beneficiary_entity.dart';
-import '../entities/transaction_entity.dart';
-import '../entities/card_entity.dart';
-import 'home_repository.dart';
+import '../../domain/entities/user_entity.dart';
+import '../../domain/entities/beneficiary_entity.dart';
+import '../../domain/entities/transaction_entity.dart';
+import '../../domain/entities/card_entity.dart';
+import '../../domain/repositories/home_repository.dart';
 import 'package:flutter/material.dart';
 
 const String kDemoCurrency = 'DZD';

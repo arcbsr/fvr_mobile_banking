@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_card_carousel/stacked_card_carousel.dart';
-import '../../../core/theme/app_theme.dart';
-import '../../components/mobix_card.dart';
+import '../../../../core/theme/app_theme.dart';
+import '../widgets/mobix_card.dart';
 import 'card_details_screen.dart';
-import 'package:moix_app/domain/repositories/demo_home_repository.dart';
-import 'package:moix_app/domain/entities/card_entity.dart';
+import '../../data/repositories/demo_home_repository.dart';
+import '../../domain/entities/card_entity.dart';
 import 'package:moix_app/l10n/app_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
 

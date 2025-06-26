@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../components/mobix_card.dart';
-import '../../../core/theme/app_theme.dart';
-import 'package:moix_app/domain/entities/card_entity.dart';
+import '../widgets/mobix_card.dart';
+import '../../../../core/theme/app_theme.dart';
+import '../../domain/entities/card_entity.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class CardDetailsScreen extends StatelessWidget {
