@@ -28,6 +28,7 @@
   "details": "Details",
   "myAccount": "My Account",
   "openBusinessAccount": "Open a Business Account for FREE",
+  "generalSettings": "General Settings",
   "helpAndSettings": "Help & Settings",
   "changeLanguage": "Change Language",
   "privacySecurity": "Privacy & Security",
@@ -51,5 +52,10 @@
   "sentRequest": "Sent Request",
   "sentRequestDesc": "Money request you have sent",
   "receivedRequest": "Received Request",
-  "receivedRequestDesc": "Your received money request history"
-} 
+  "receivedRequestDesc": "Your received money request history",
+  "deleteAccountConfirmation": "Are your Sure you want to Delete your Account?",
+  "deleteAccountNotice": "Make sure to withdrawal your money before you do this action. Otherwise your balance can't be retrieved.",
+  "deleteAccountLatterButton": "No, I’ll do it latter",
+  "deleteAccountConfirmButton": "Yes I want to Delete",
+  "deleteAccountConfirmMsg": "Account deleted successfully"
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moix_app/features/more/pages/more_screens.dart';
 import '../widgets/home_header.dart';
 import '../widgets/balance_card.dart';
 import '../widgets/recent_transfers.dart';
@@ -45,9 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
             // Scan page
             ScanScreen(),
             // Transfer page
+
             TransferScreen(),
-            // More page
-            MoreScreen(),
+           // MoreScreen(),
+            // More Screen Page
+            MoreScreens(),
+            //MoreScreens()
           ],
         ),
       ),

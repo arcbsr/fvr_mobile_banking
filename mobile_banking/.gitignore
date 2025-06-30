@@ -141,3 +141,6 @@ xcuserdata/
 
 # Ignore SwiftPM build directory
 .build/
+
+# FVM Version Cache
+.fvm/

@@ -28,6 +28,7 @@
   "details": "Détails",
   "myAccount": "Mon compte",
   "openBusinessAccount": "Ouvrir un compte professionnel GRATUITEMENT",
+  "generalSettings": "Paramètres généraux",
   "helpAndSettings": "Aide & Paramètres",
   "changeLanguage": "Changer de langue",
   "privacySecurity": "Confidentialité & Sécurité",
@@ -51,5 +52,10 @@
   "sentRequest": "Demande envoyée",
   "sentRequestDesc": "Demande d'argent que vous avez envoyée",
   "receivedRequest": "Demande reçue",
-  "receivedRequestDesc": "Historique des demandes d'argent reçues"
+  "receivedRequestDesc": "Historique des demandes d'argent reçues",
+  "deleteAccountConfirmation": "Êtes-vous sûr de vouloir supprimer votre compte ?",
+  "deleteAccountNotice": "Assurez-vous de retirer votre argent avant d'effectuer cette action. Sinon, votre solde ne pourra pas être récupéré.",
+  "deleteAccountLatterButton": "Non, je le ferai plus tard.",
+  "deleteAccountConfirmButton": "Oui, je veux supprimer",
+  "deleteAccountConfirmMsg": "Compte supprimé avec succès"
 } 

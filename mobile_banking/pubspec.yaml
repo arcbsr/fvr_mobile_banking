@@ -39,6 +39,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   stacked_card_carousel: ^0.0.4
   easy_localization: ^3.0.7+1
+  equatable:
 
 dev_dependencies:
   flutter_test:

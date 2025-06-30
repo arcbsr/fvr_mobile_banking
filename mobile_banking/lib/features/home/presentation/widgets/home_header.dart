@@ -29,11 +29,11 @@ class HomeHeader extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 18.r,
-                      backgroundImage: AssetImage(user.avatarUrl),
+                      backgroundImage: AssetImage(user.avatarUrl??""),
                     ),
                     SizedBox(width: 12.w),
                     Text(
-                      'helloUser'.tr(namedArgs: {'name': user.name}),
+                      'helloUser'.tr(namedArgs: {'name': user.name??""}),
                       style: AppTextStyles.header,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -69,7 +69,7 @@ class HomeHeader extends StatelessWidget {
                       children: [
                         Icon(Icons.notifications_none_rounded,
                             size: 32.sp, color: const Color(0xFF191919)),
-                        if (user.notificationCount > 0)
+                        if ((user.notificationCount??0) > 0)
                           Positioned(
                             right: 2.w,
                             top: -2.h,

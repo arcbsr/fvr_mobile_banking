@@ -28,7 +28,7 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 24.r,
-                        backgroundImage: AssetImage(user.avatarUrl),
+                        backgroundImage: AssetImage(user.avatarUrl??""),
                       ),
                       SizedBox(width: 12.w),
                       Column(
@@ -40,7 +40,7 @@ class MoreScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 2.h),
                           Text(
-                            user.phoneNumber,
+                            user.phoneNumber??"",
                             style: AppTextStyles.body.copyWith(color: Colors.grey[500]),
                           ),
                         ],
