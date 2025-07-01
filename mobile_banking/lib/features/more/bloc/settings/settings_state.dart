@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:moix_app/features/home/domain/entities/user_entity.dart';
-import '../model/settings_item.dart';
+
+import '../../model/settings_item.dart';
 
 abstract class SettingsState extends Equatable {
   const SettingsState();
@@ -15,7 +16,7 @@ class SettingsLoaded extends SettingsState {
   final List<SettingsItem> items;
   final User user;
 
-  const SettingsLoaded(this.items,this.user);
+  const SettingsLoaded(this.items, this.user);
 
   @override
   List<Object?> get props => [items];
@@ -26,6 +27,7 @@ class SettingsLoaded extends SettingsState {
 */
 class MyAccountState extends SettingsState {
   final User user;
+
   const MyAccountState(this.user);
 }
 
@@ -46,6 +48,60 @@ class UpdatePersonalInfoFailed extends SettingsState {
 */
 
 /*
+* Business Account Page
+*/
+class BusinessAccountState extends SettingsState {}
+
+class BusinessAccountEmpty extends SettingsState {}
+
+class BusinessAccountLoaded extends SettingsState {
+  final String accountName;
+
+  const BusinessAccountLoaded(this.accountName);
+}
+
+class CreatingBusinessAccount extends SettingsState {}
+
+class BusinessAccountCreatedSuccess extends SettingsState {}
+
+class BusinessAccountCreatedFailed extends SettingsState {
+  final String message;
+
+  const BusinessAccountCreatedFailed(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+/*
+* Business Account Page End
+*/
+/*
+*//*
+* Language Change Page
+*//*
+class ChangeLanguageState extends SettingsState {
+  //const ChangeLanguageState();
+}
+
+class LanguageSelect extends SettingsState {
+  final String selectedLanguage;
+
+  LanguageSelect({required this.selectedLanguage});
+
+  LanguageSelect copyWith({String? selectedLanguage}) {
+    return LanguageSelect(
+      selectedLanguage: selectedLanguage ?? this.selectedLanguage,
+    );
+  }
+}
+
+class SaveLanguage extends SettingsState {}
+
+*//*
+* Language Change Page End
+*/
+
+/*
 * Delete Account Page
 */
 class DeleteAccountState extends SettingsState {}
@@ -62,6 +118,7 @@ class DeleteFailed extends SettingsState {
   @override
   List<Object?> get props => [message];
 }
+
 /*
 * Delete Account Page End
 */

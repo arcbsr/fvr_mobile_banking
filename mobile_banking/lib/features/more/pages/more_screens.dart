@@ -2,11 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:moix_app/features/more/pages/business_account_page.dart';
+import 'package:moix_app/features/more/pages/language_change_page.dart';
+import 'package:moix_app/features/more/pages/language_page.dart';
 
 import '../../../core/theme/app_theme.dart';
-import '../bloc/settings_bloc.dart';
-import '../bloc/settings_event.dart';
-import '../bloc/settings_state.dart';
+import '../bloc/settings/settings_bloc.dart';
+import '../bloc/settings/settings_event.dart';
+import '../bloc/settings/settings_state.dart';
 import 'delete_account_page.dart';
 import 'my_account_page.dart';
 
@@ -19,22 +22,8 @@ class MoreScreens extends StatelessWidget {
       create: (_) => SettingsBloc()..add(LoadSettings()),
       child: BlocListener<SettingsBloc, SettingsState>(
         listener: (context, state) {
-          if (state is DeleteAccountState) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                  value: context.read<SettingsBloc>(), // provide the existing bloc
-                  child: DeleteAccountPage(),
-                ),
-              ),
-            );
-          /*  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => DeleteAccountPage()),
-            );*/
-          }
-          else if (state is MyAccountState) {
+
+          if (state is MyAccountState) {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -44,6 +33,47 @@ class MoreScreens extends StatelessWidget {
                 ),
               ),
             );
+          }
+          else if (state is BusinessAccountState) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: context.read<SettingsBloc>(), // provide the existing bloc
+                  child: BusinessAccountPage(),
+                ),
+              ),
+            );
+          }
+     /*     else if (state is ChangeLanguageState) {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => LanguagePage()),
+            );
+            *//*Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: context.read<SettingsBloc>(), // provide the existing bloc
+                  child: LanguageChangePage(),
+                ),
+              ),
+            );*//*
+          }*/
+          else if (state is DeleteAccountState) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider.value(
+                  value: context.read<SettingsBloc>(), // provide the existing bloc
+                  child: DeleteAccountPage(),
+                ),
+              ),
+            );
+            /*  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => DeleteAccountPage()),
+            );*/
           }
         },
         child: Scaffold(
@@ -103,10 +133,20 @@ class MoreScreens extends StatelessWidget {
                               label: item.title,
                               onTap: () {
                                 if (item.title == 'myAccount'.tr()) {
-                                  context.read<SettingsBloc>().add(MyAccountPressed());
+                                  context.read<SettingsBloc>().add(MyAccountLoad());
+                                }
+                                else if (item.title == 'openBusinessAccount'.tr()) {
+                                  context.read<SettingsBloc>().add(BusinessAccountLoad());
+                                }
+                                else if (item.title == 'changeLanguage'.tr()) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => LanguagePage()),
+                                  );
+                                  // context.read<SettingsBloc>().add(LanguageChangeLoad());
                                 }
                                 else if (item.title == 'deleteAccount'.tr()) {
-                                  context.read<SettingsBloc>().add(DeleteAccountPressed());
+                                  context.read<SettingsBloc>().add(DeleteAccountLoad());
                                 }
                               },
                             );

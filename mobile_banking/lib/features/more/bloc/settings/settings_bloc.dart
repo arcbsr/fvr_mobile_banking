@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../home/data/repositories/demo_home_repository.dart';
-import '../model/settings_item.dart';
+import '../../../home/data/repositories/demo_home_repository.dart';
+import '../../model/settings_item.dart';
 import 'settings_event.dart';
 import 'settings_state.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +28,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
    /* on<MyAccountPressed>((event, emit) {
       emit(MyAccountState());
     });*/
-
-    on<MyAccountPressed>((event, emit) {
+////////////////////////////////////////////////////////////////////////////////
+    on<MyAccountLoad>((event, emit) {
       if (state is SettingsLoaded) {
         final user = (state as SettingsLoaded).user;
         emit(MyAccountState(user));
@@ -48,7 +48,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           email: event.email,
           address: event.address,
         );*/
-
+        await Future.delayed(Duration(seconds: 2)); // Simulate delete API
         emit(UpdatePersonalInfoSuccess());
         // emit(LoadSettings()); // Refresh
       } catch (e) {
@@ -56,7 +56,52 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
     });
 
-    on<DeleteAccountPressed>((event, emit) {
+
+////////////////////////////////////////////////////////////////////////////////
+    on<BusinessAccountLoad>((event, emit) {
+      emit(BusinessAccountState());
+    });
+   /* on<BusinessAccountLoad>((event, emit) async {
+      emit(BusinessAccountState());
+      //await Future.delayed(Duration(seconds: 1)); // simulate API delay
+     // emit(BusinessAccountEmpty()); // no account found
+    });*/
+
+    on<CreatedBusinessAccount>((event, emit) async {
+      emit(CreatingBusinessAccount());
+      await Future.delayed(Duration(seconds: 2)); // Simulate delete API
+   /*   emit(BusinessAccountLoaded("Mobix Traders Ltd"));
+      await Future.delayed(Duration(seconds: 2));*/
+      emit(BusinessAccountCreatedSuccess());
+    });
+
+////////////////////////////////////////////////////////////////////////////////
+/*    on<LanguageChangeLoad>((event, emit) {
+      emit(ChangeLanguageState());
+      emit(LanguageSelect(selectedLanguage: 'en'));
+    *//*  if (state is LanguageSelect) {
+        emit(LanguageSelect(selectedLanguage: event.languageCode));
+      }*//*
+    });
+
+   on<ChangeLanguage>((event, emit) {
+     if (state is LanguageSelect) {
+       print("ChangeLanguage");
+       emit((state as LanguageSelect).copyWith(selectedLanguage: event.languageCode));
+     }
+     // emit(LanguageSelect(selectedLanguage: event.languageCode));
+    });
+
+  *//*  on<LanguageSelected>((event, emit) {
+      emit(state.copyWith(selectedLanguageCode: event.languageCode));
+    });*//*
+
+    on<SavedSelectedLanguage>((event, emit) async {
+      emit(SaveLanguage());
+    });
+////////////////////////////////////////////////////////////////////////////////
+*/
+    on<DeleteAccountLoad>((event, emit) {
       emit(DeleteAccountState());
     });
 

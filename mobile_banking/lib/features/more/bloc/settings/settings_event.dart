@@ -14,7 +14,7 @@ class LogoutPressed extends SettingsEvent {}
 /*
 * My Account Page
 */
-class MyAccountPressed extends SettingsEvent {}
+class MyAccountLoad extends SettingsEvent {}
 
 class UpdatePersonalInfo extends SettingsEvent {
   final String name;
@@ -31,9 +31,35 @@ class UpdatePersonalInfo extends SettingsEvent {
 */
 
 /*
+* Business Account Page
+*/
+class BusinessAccountLoad extends SettingsEvent {}
+
+class CreatedBusinessAccount extends SettingsEvent {}
+/*
+* Business Account Page End
+*/
+
+/*
+* Language Account Page
+*//*
+class LanguageChangeLoad extends SettingsEvent {}
+
+class ChangeLanguage extends SettingsEvent {
+  final String languageCode;
+
+  const ChangeLanguage(this.languageCode);
+}
+
+class SavedSelectedLanguage extends SettingsEvent {}
+*//*
+* Language Page End
+*/
+
+/*
 * Delete Account Page
 */
-class DeleteAccountPressed extends SettingsEvent {}
+class DeleteAccountLoad extends SettingsEvent {}
 
 class ConfirmDeleteAccount extends SettingsEvent {}
 /*

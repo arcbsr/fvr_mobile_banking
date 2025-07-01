@@ -57,5 +57,20 @@
   "deleteAccountNotice": "Assurez-vous de retirer votre argent avant d'effectuer cette action. Sinon, votre solde ne pourra pas être récupéré.",
   "deleteAccountLatterButton": "Non, je le ferai plus tard.",
   "deleteAccountConfirmButton": "Oui, je veux supprimer",
-  "deleteAccountConfirmMsg": "Compte supprimé avec succès"
+  "deleteAccountConfirmMsg": "Compte supprimé avec succès",
+  "personalInfo": "Informations personnelles",
+  "personalInfoUpdate": "Mettez à jour vos informations personnelles",
+  "userName": "Nom d'utilisateur",
+  "fName": "Nom et prénom",
+  "dob": "Date de naissance",
+  "phoneNumber": "Numéro de téléphone",
+  "emailAddress": "Adresse email",
+  "address": "Adresse",
+  "confirmAndSend": "Confirmer et envoyer",
+  "businessAccount": "Compte professionnel",
+  "businessAccountSubTitle": "Votre passerelle vers le succès commercial avec Mobix",
+  "noBusinessAccount": "Pas de compte professionnel",
+  "openBusinessAccount": "Ouvrez un compte aujourd'hui",
+  "selectLanguage": "Sélectionnez la langue",
+  "saveLanguage": "Sauvegarder"
 } 

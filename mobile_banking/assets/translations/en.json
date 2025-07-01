@@ -57,5 +57,21 @@
   "deleteAccountNotice": "Make sure to withdrawal your money before you do this action. Otherwise your balance can't be retrieved.",
   "deleteAccountLatterButton": "No, I’ll do it latter",
   "deleteAccountConfirmButton": "Yes I want to Delete",
-  "deleteAccountConfirmMsg": "Account deleted successfully"
+  "deleteAccountConfirmMsg": "Account deleted successfully",
+  "personalInfo": "Personal Informations",
+  "personalInfoUpdate": "Update your personal information",
+  "userName": "User Name",
+  "fName": "Full Name",
+  "dob": "Date of Birth",
+  "phoneNumber": "Phone Number",
+  "emailAddress": "Email Address",
+  "address": "Address",
+  "confirmAndSend": "Confirm & Send",
+  "businessAccount": "Business Account",
+  "businessAccountSubTitle": "Your Gateway to business success with Mobix",
+  "noBusinessAccount": "No business account",
+  "openBusinessAccount": "Open an account today",
+  "selectLanguage": "Select Language",
+  "saveLanguage": "Save"
+
 }

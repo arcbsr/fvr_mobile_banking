@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../bloc/settings_bloc.dart';
-import '../bloc/settings_event.dart';
-import '../bloc/settings_state.dart';
+import '../../../core/theme/app_theme.dart';
+import '../bloc/settings/settings_bloc.dart';
+import '../bloc/settings/settings_event.dart';
+import '../bloc/settings/settings_state.dart';
 
 class MyAccountPage extends StatefulWidget {
   const MyAccountPage({super.key});
@@ -26,12 +28,12 @@ class _MyAccountPageState extends State<MyAccountPage> {
     super.initState();
     final user = context.read<SettingsBloc>().state;
     if (user is MyAccountState) {
-      _usernameController.text = user.user.name??"";
-      _fullNameController.text = user.user.fullName??"";
-      _dobController.text = user.user.dob??"";
-      _phoneController.text = user.user.phoneNumber??"";
-      _emailController.text = user.user.email??"";
-      _addressController.text = user.user.address??"";
+      _usernameController.text = user.user.name ?? "";
+      _fullNameController.text = user.user.fullName ?? "";
+      _dobController.text = user.user.dob ?? "";
+      _phoneController.text = user.user.phoneNumber ?? "";
+      _emailController.text = user.user.email ?? "";
+      _addressController.text = user.user.address ?? "";
     }
   }
 
@@ -51,18 +53,18 @@ class _MyAccountPageState extends State<MyAccountPage> {
     return BlocConsumer<SettingsBloc, SettingsState>(
       listener: (context, state) {
         if (state is UpdatePersonalInfoSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Profile updated")),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text("Profile updated")));
           Navigator.pop(context);
           context.read<SettingsBloc>().add(LoadSettings());
         } else if (state is UpdatePersonalInfoFailed) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+          Navigator.pop(context);
+          context.read<SettingsBloc>().add(LoadSettings());
         }
-        Navigator.pop(context);
-        context.read<SettingsBloc>().add(LoadSettings());
       },
       builder: (context, state) {
         final isLoading = state is UpdatingPersonalInfo;
@@ -79,39 +81,69 @@ class _MyAccountPageState extends State<MyAccountPage> {
               backgroundColor: Colors.white,
               //title: Text('deleteAccount'.tr()),
             ),
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  _buildField("Username", _usernameController),
-                  _buildField("Full Name", _fullNameController),
-                  _buildDatePickerField("Date of Birth", _dobController),
-                  _buildField("Phone Number", _phoneController),
-                  _buildField("Email Address", _emailController),
-                  _buildField("Address", _addressController),
-                  const SizedBox(height: 24),
-                  ElevatedButton(
-                    onPressed: isLoading
-                        ? null
-                        : () {
-                      context.read<SettingsBloc>().add(UpdatePersonalInfo(
-                        name: _usernameController.text,
-                        fullName: _fullNameController.text,
-                        dob: _dobController.text,
-                        phone: _phoneController.text,
-                        email: _emailController.text,
-                        address: _addressController.text,
-                      ));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple,
-                      minimumSize: const Size(double.infinity, 50),
-                    ),
-                    child: isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text("Confirm & Send"),
+            body: SafeArea(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10.h),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'personalInfo'.tr(),
+                            style: AppTextStyles.title,
+                          ),
+                          SizedBox(height: 2.h),
+                          Text(
+                            'personalInfoUpdate'.tr(),
+                            style: AppTextStyles.body.copyWith(
+                              color: Colors.grey[500],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20.h),
+                      _buildField('userName'.tr(), _usernameController),
+                      _buildField('fName'.tr(), _fullNameController),
+                      _buildDatePickerField('dob'.tr(), _dobController),
+                      _buildField('phoneNumber'.tr(), _phoneController),
+                      _buildField('emailAddress'.tr(), _emailController),
+                      _buildField('address'.tr(), _addressController),
+                      const SizedBox(height: 24),
+                      ElevatedButton(
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                context.read<SettingsBloc>().add(
+                                  UpdatePersonalInfo(
+                                    name: _usernameController.text,
+                                    fullName: _fullNameController.text,
+                                    dob: _dobController.text,
+                                    phone: _phoneController.text,
+                                    email: _emailController.text,
+                                    address: _addressController.text,
+                                  ),
+                                );
+                              },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          minimumSize: const Size(double.infinity, 50),
+                        ),
+                        child: isLoading
+                            ? const CircularProgressIndicator(color: Colors.white)
+                            : Text(
+                                'confirmAndSend'.tr(),
+                                style: AppTextStyles.title.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
@@ -125,7 +157,13 @@ class _MyAccountPageState extends State<MyAccountPage> {
       padding: const EdgeInsets.only(bottom: 16),
       child: TextField(
         controller: controller,
-        decoration: InputDecoration(labelText: label),
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey, width: 1),
+          ),
+        ),
       ),
     );
   }
@@ -139,6 +177,10 @@ class _MyAccountPageState extends State<MyAccountPage> {
         decoration: InputDecoration(
           labelText: label,
           suffixIcon: const Icon(Icons.calendar_today),
+          border: OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey, width: 1),
+          ),
         ),
         onTap: () async {
           DateTime? date = await showDatePicker(
@@ -148,7 +190,8 @@ class _MyAccountPageState extends State<MyAccountPage> {
             lastDate: DateTime.now(),
           );
           if (date != null) {
-            controller.text = "${date.day} ${_monthName(date.month)} ${date.year}";
+            controller.text =
+                "${date.day} ${_monthName(date.month)} ${date.year}";
           }
         },
       ),
@@ -157,8 +200,19 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
   String _monthName(int month) {
     const months = [
-      '', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      '',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return months[month];
   }
