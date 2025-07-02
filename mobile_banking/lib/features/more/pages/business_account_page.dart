@@ -58,7 +58,7 @@ class BusinessAccountPage extends StatelessWidget {
                         children: [
                           Text(
                             'businessAccount'.tr(),
-                            style:AppTextStyles.title,
+                            style:AppTextStyles.header,
                           ),
                           SizedBox(height: 4),
                           Text(

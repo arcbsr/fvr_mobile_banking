@@ -41,7 +41,7 @@ class LanguagePage extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('selectLanguage'.tr(), style: AppTextStyles.title),
+                      Text('selectLanguage'.tr(), style: AppTextStyles.header),
                       const SizedBox(height: 16),
                       ...languages.map((lang) {
                         final isSelected =

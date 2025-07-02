@@ -94,7 +94,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                         children: [
                           Text(
                             'personalInfo'.tr(),
-                            style: AppTextStyles.title,
+                            style: AppTextStyles.header,
                           ),
                           SizedBox(height: 2.h),
                           Text(
