@@ -40,6 +40,7 @@ dependencies:
   stacked_card_carousel: ^0.0.4
   easy_localization: ^3.0.7+1
   equatable:
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

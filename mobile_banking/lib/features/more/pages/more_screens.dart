@@ -21,6 +21,7 @@ class MoreScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale; // Rebuild on locale change
     return BlocProvider(
       create: (_) => SettingsBloc()..add(LoadSettings()),
       child: BlocListener<SettingsBloc, SettingsState>(
@@ -157,8 +158,10 @@ class MoreScreens extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (_) => LanguagePage(),
                                     ),
-                                  );
-                                  // context.read<SettingsBloc>().add(LanguageChangeLoad());
+                                  ).then((result) {
+                                    // After returning from LanguagePage, just reload settings
+                                    context.read<SettingsBloc>().add(LoadSettings());
+                                  });
                                 } else if (item.title ==
                                     'privacySecurity'.tr()) {
                                   Navigator.push(
