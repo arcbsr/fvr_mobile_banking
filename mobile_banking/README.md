@@ -28,7 +28,7 @@ Mobix App is a cross-platform mobile banking solution built with Flutter 3.x, fo
 
 | Home Screen | NFC Checking |
 |:-----------:|:-----------:|
-| ![Home](screens/home.png) | ![NFC Checking](screens/nfc_checkign.png) |
+| ![Home](https://github.com/arcbsr/fvr_mobile_banking/blob/settings/screens/home.png) | ![NFC Checking](https://github.com/arcbsr/fvr_mobile_banking/blob/settings/screens/nfc_checkign.png) |
 
 ## Getting Started
 
