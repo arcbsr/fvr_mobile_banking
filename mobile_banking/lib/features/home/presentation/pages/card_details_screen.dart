@@ -13,10 +13,9 @@ class CardDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black, size: 22.sp),
+          icon: Icon(Icons.arrow_back_ios_new_rounded, size: 22.sp),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('Mobix Premium', style: AppTextStyles.header.copyWith(fontSize: 18.sp)),

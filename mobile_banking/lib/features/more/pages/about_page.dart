@@ -19,7 +19,7 @@ class AboutPage extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(backgroundColor: Colors.white),
+            appBar: AppBar(),
             body: Padding(
               padding: EdgeInsets.only(
                 left: 20.w,
@@ -30,8 +30,8 @@ class AboutPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('aboutUs'.tr(), style: AppTextStyles.header),
-                   Text('aboutUsSubTitle'.tr(), style: AppTextStyles.body.copyWith(color: Colors.grey[500])),
+                  Text('aboutUs'.tr(), style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color)),
+                   Text('aboutUsSubTitle'.tr(), style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color)),
                    SizedBox(height: 30.h),
                   _buildRateTile(
                     icon: Icons.apple,
@@ -53,9 +53,9 @@ class AboutPage extends StatelessWidget {
                    SizedBox(height: 32.h),
                   Text(
                     'socialMedia'.tr(),
-                    style: AppTextStyles.header,
+                    style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color),
                   ),
-                  Text('followUsOn'.tr(),style: AppTextStyles.body.copyWith(color: Colors.grey[500])),
+                  Text('followUsOn'.tr(),style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodySmall?.color)),
                   SizedBox(height: 16.h),
                   _buildSocialTile(
                     "Facebook",

@@ -18,6 +18,7 @@ class LatestTransactions extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
         final transactions = snapshot.data!;
+        final isDark = Theme.of(context).brightness == Brightness.dark;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -26,12 +27,12 @@ class LatestTransactions extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('latestTransactions'.tr(), style: AppTextStyles.header),
+                  Text('latestTransactions'.tr(), style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color)),
                   TextButton(
                     onPressed: () {
                       // TODO: Implement view all action
                     },
-                    child: Text('viewAll'.tr(), style: AppTextStyles.caption),
+                    child: Text('viewAll'.tr(), style: AppTextStyles.caption.copyWith(color: Theme.of(context).textTheme.bodySmall?.color)),
                   ),
                 ],
               ),
@@ -45,11 +46,11 @@ class LatestTransactions extends StatelessWidget {
                   return Container(
                     padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: isDark ? Theme.of(context).colorScheme.surface : Colors.white,
                       borderRadius: BorderRadius.circular(12.r),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF270685).withOpacity(0.05),
+                          color: isDark ? Colors.black.withOpacity(0.12) : const Color(0xFF270685).withOpacity(0.05),
                           blurRadius: 1.r,
                           offset: Offset(0, 0.h),
                         ),
@@ -67,8 +68,8 @@ class LatestTransactions extends StatelessWidget {
                               tx.logoUrl,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) => Container(
-                                color: Colors.grey[300],
-                                child: Icon(Icons.broken_image, size: 24.sp, color: Colors.grey),
+                                color: isDark ? Colors.grey[800] : Colors.grey[300],
+                                child: Icon(Icons.broken_image, size: 24.sp, color: isDark ? Colors.grey[400] : Colors.grey),
                               ),
                             ),
                           ),
@@ -80,19 +81,19 @@ class LatestTransactions extends StatelessWidget {
                             children: [
                               Text(
                                 tx.title,
-                                style: AppTextStyles.title,
+                                style: AppTextStyles.title.copyWith(color: Theme.of(context).textTheme.titleMedium?.color),
                               ),
                               SizedBox(height: 2.h),
                               Row(
                                 children: [
                                   Text(
                                     tx.date,
-                                    style: AppTextStyles.caption,
+                                    style: AppTextStyles.caption.copyWith(color: Theme.of(context).textTheme.bodySmall?.color),
                                   ),
                                   SizedBox(width: 4.w),
                                   Text(
                                     tx.time,
-                                    style: AppTextStyles.caption,
+                                    style: AppTextStyles.caption.copyWith(color: Theme.of(context).textTheme.bodySmall?.color),
                                   ),
                                 ],
                               ),
@@ -106,7 +107,9 @@ class LatestTransactions extends StatelessWidget {
                             Text(
                               tx.amount,
                               style: AppTextStyles.title.copyWith(
-                                color: tx.isCredit ? const Color(0xFF4DA66B) : const Color(0xFFB83232),
+                                color: tx.isCredit
+                                    ? (isDark ? Theme.of(context).colorScheme.secondary : const Color(0xFF4DA66B))
+                                    : (isDark ? Theme.of(context).colorScheme.error : const Color(0xFFB83232)),
                               ),
                             ),
                           ],

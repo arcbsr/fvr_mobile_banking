@@ -51,7 +51,7 @@ class HomeHeader extends StatelessWidget {
                     ),
                     child: Text(
                       'earnAmount'.tr(namedArgs: {'amount': user.earnAmount.toString()}),
-                      style: AppTextStyles.body.copyWith(color: Colors.white),
+                      style: AppTextStyles.body.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ),
                   SizedBox(width: 8.w),

@@ -23,7 +23,7 @@ class ContactSupportPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => SupportBloc(),
       child: Scaffold(
-        appBar: AppBar(backgroundColor: Colors.white),
+        appBar: AppBar(),
         body: SafeArea(
           child: BlocConsumer<SupportBloc, SupportState>(
             listener: (context, state) {
@@ -51,9 +51,9 @@ class ContactSupportPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('contactSupport'.tr(), style: AppTextStyles.header),
+                    Text('contactSupport'.tr(), style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color)),
                     const SizedBox(height: 16),
-                    Text('contactSupportSubTitle'.tr(),style: AppTextStyles.body.copyWith(color: Colors.grey[500],)),
+                    Text('contactSupportSubTitle'.tr(),style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color)),
                     const SizedBox(height: 24),
                     _buildContactOption(
                       icon: Icons.email_outlined,
@@ -75,7 +75,7 @@ class ContactSupportPage extends StatelessWidget {
                     SizedBox(height: 32.h),
                     Text(
                       'onlineSupport'.tr(),
-                      style: AppTextStyles.title,
+                      style: AppTextStyles.title.copyWith(color: Theme.of(context).textTheme.titleLarge?.color),
                     ),
                     SizedBox(height: 12.h),
                     DropdownButtonFormField<String>(
@@ -119,7 +119,7 @@ class ContactSupportPage extends StatelessWidget {
                             SubmitSupportRequest(),
                           );
                         },
-                        child: Text('submit'.tr(),style: AppTextStyles.title.copyWith(color: Colors.white)),
+                        child: Text('submit'.tr(),style: AppTextStyles.title.copyWith(color: Theme.of(context).colorScheme.onPrimary)),
                       ),
                     ),
                     /* if (state.submitted)

@@ -41,13 +41,14 @@ class BottomNavBar extends StatelessWidget {
         onTap: () => onTap(4),
       ),
     ];
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? Theme.of(context).colorScheme.surface : Colors.white,
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF270685).withOpacity(0.06),
+            color: isDark ? Colors.black.withOpacity(0.2) : const Color(0xFF270685).withOpacity(0.06),
             blurRadius: 16.r,
             offset: Offset(0, -2.h),
           ),
@@ -70,9 +71,13 @@ class _NavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = Theme.of(context).primaryColor;
-    final Color iconColor = selected ? primary : const Color(0xFF8A939B);
-    final Color textColor = selected ? primary : const Color(0xFF8A939B);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color iconColor = selected
+        ? (isDark ? Theme.of(context).colorScheme.secondary : Theme.of(context).primaryColor)
+        : (isDark ? Theme.of(context).colorScheme.onSurface : Theme.of(context).textTheme.bodySmall?.color ?? const Color(0xFF8A939B));
+    final Color textColor = selected
+        ? (isDark ? Theme.of(context).colorScheme.secondary : Theme.of(context).primaryColor)
+        : (isDark ? Theme.of(context).colorScheme.onSurface : Theme.of(context).textTheme.bodySmall?.color ?? const Color(0xFF8A939B));
     return Expanded(
       child: GestureDetector(
         onTap: onTap,

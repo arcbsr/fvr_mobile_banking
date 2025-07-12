@@ -65,20 +65,20 @@ class MobixCard extends StatelessWidget {
                         SizedBox(width: 12.w),
                         Text(
                           card.type,
-                          style: AppTextStyles.title.copyWith(color: Colors.white),
+                          style: AppTextStyles.title.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ],
                     ),
                     Text(
                       card.maskedNumber,
-                      style: AppTextStyles.title.copyWith(color: Colors.white),
+                      style: AppTextStyles.title.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ],
                 ),
                 SizedBox(height: 18.h),
                 Text(
                   card.cardholderName,
-                  style: AppTextStyles.body.copyWith(color: Colors.white, fontSize: 18.sp),
+                  style: AppTextStyles.body.copyWith(color: Theme.of(context).colorScheme.onPrimary, fontSize: 18.sp),
                 ),
                 SizedBox(height: 2.h),
                 Row(

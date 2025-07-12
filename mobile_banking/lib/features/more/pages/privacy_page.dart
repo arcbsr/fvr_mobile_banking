@@ -7,6 +7,7 @@ import '../../../core/theme/app_theme.dart';
 import '../bloc/privacy/privacy_bloc.dart';
 import '../bloc/privacy/privacy_event.dart';
 import '../bloc/privacy/privacy_state.dart';
+import '../../../core/theme/theme_cubit.dart';
 
 class PrivacyPage extends StatelessWidget {
   const PrivacyPage({super.key});
@@ -16,7 +17,7 @@ class PrivacyPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => PrivacyBloc(),
       child: Scaffold(
-        appBar: AppBar(backgroundColor: Colors.white),
+        appBar: AppBar(),
         body: BlocConsumer<PrivacyBloc, PrivacyState>(
           listener: (context, state) {
             // Optional: show snackbar on toggle
@@ -25,14 +26,15 @@ class PrivacyPage extends StatelessWidget {
             return ListView(
               padding: EdgeInsets.all(20.w),
               children: [
-                Text('privacySecurity'.tr(), style: AppTextStyles.header),
+                Text('privacySecurity'.tr(), style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color)),
                 Text(
                   'privacySecuritySubTitle'.tr(),
-                  style: AppTextStyles.body.copyWith(color: Colors.grey[500]),
+                  style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color),
                 ),
                 SizedBox(height: 40.h),
-                _sectionTitle('account'.tr()),
+                _sectionTitle(context, 'account'.tr()),
                 _tileWithArrow(
+                  context: context,
                   icon: Icons.lock_outline,
                   title: 'changeAccountPassword'.tr(),
                   onTap: () {
@@ -40,6 +42,7 @@ class PrivacyPage extends StatelessWidget {
                   },
                 ),
                 _toggleTile(
+                  context: context,
                   icon: Icons.remove_red_eye_outlined,
                   title: 'privacyMode'.tr(),
                   subtitle: 'privacyModeSubTitle'.tr(),
@@ -49,8 +52,9 @@ class PrivacyPage extends StatelessWidget {
                   },
                 ),
                  SizedBox(height: 40.h),
-                _sectionTitle('lockScreen'.tr()),
+                _sectionTitle(context, 'lockScreen'.tr()),
                 _tileWithArrow(
+                  context: context,
                   icon: Icons.pin_outlined,
                   title: 'changeLockPIN'.tr(),
                   onTap: () {
@@ -58,6 +62,7 @@ class PrivacyPage extends StatelessWidget {
                   },
                 ),
                 _toggleTile(
+                  context: context,
                   icon: Icons.fingerprint,
                   title: 'fingerprintUnlock'.tr(),
                   value: state.fingerprintUnlock,
@@ -66,6 +71,7 @@ class PrivacyPage extends StatelessWidget {
                   },
                 ),
                 _toggleTile(
+                  context: context,
                   icon: Icons.lock_clock,
                   title: 'autoLock'.tr(),
                   value: state.autoLock,
@@ -74,13 +80,14 @@ class PrivacyPage extends StatelessWidget {
                   },
                 ),
                  SizedBox(height: 40.h),
-                _sectionTitle('appTheme'.tr()),
+                _sectionTitle(context, 'appTheme'.tr()),
                 _toggleTile(
+                  context: context,
                   icon: Icons.dark_mode,
                   title: 'darkMode'.tr(),
-                  value: state.darkMode,
-                  onChanged: (_) {
-                    context.read<PrivacyBloc>().add(ToggleDarkMode());
+                  value: context.watch<ThemeCubit>().state == ThemeMode.dark,
+                  onChanged: (val) {
+                    context.read<ThemeCubit>().setDarkMode(val);
                   },
                 ),
               ],
@@ -91,17 +98,18 @@ class PrivacyPage extends StatelessWidget {
     );
   }
 
-  Widget _sectionTitle(String title) {
+  Widget _sectionTitle(BuildContext context, String title) {
     return Padding(
       padding: EdgeInsets.only(bottom: 8),
       child: Text(
         title,
-        style: AppTextStyles.title,
+        style: AppTextStyles.title.copyWith(color: Theme.of(context).textTheme.titleLarge?.color),
       ),
     );
   }
 
   Widget _tileWithArrow({
+    required BuildContext context,
     required IconData icon,
     required String title,
     VoidCallback? onTap,
@@ -112,12 +120,13 @@ class PrivacyPage extends StatelessWidget {
         backgroundColor: Colors.grey.shade100,
         child: Icon(icon, color: Colors.black),
       ),
-      title: Text(title, style: AppTextStyles.body),
+      title: Text(title, style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
     );
   }
 
   Widget _toggleTile({
+    required BuildContext context,
     required IconData icon,
     required String title,
     String? subtitle,
@@ -129,12 +138,12 @@ class PrivacyPage extends StatelessWidget {
         backgroundColor: Colors.grey.shade100,
         child: Icon(icon, color: Colors.black),
       ),
-      title: Text(title,style: AppTextStyles.body),
-      subtitle: subtitle != null ? Text(subtitle, style: AppTextStyles.body.copyWith(color: Colors.grey[500])) : null,
-      activeColor: Colors.green, // ✅ thumb (circle) color when ON
-      activeTrackColor: Colors.green.shade50, // ✅ track (bar) color when ON
-      inactiveThumbColor: Colors.grey, // optional
-      inactiveTrackColor: Colors.grey.shade300, // optional
+      title: Text(title, style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color)),
+      subtitle: subtitle != null ? Text(subtitle, style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodySmall?.color)) : null,
+      activeColor: Theme.of(context).colorScheme.secondary,
+      activeTrackColor: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+      inactiveThumbColor: Theme.of(context).disabledColor,
+      inactiveTrackColor: Theme.of(context).disabledColor.withOpacity(0.2),
       value: value,
       onChanged: onChanged,
     );

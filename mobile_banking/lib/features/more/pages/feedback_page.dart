@@ -18,7 +18,7 @@ class FeedbackPage extends StatelessWidget {
       create: (_) =>
           FeedbackBloc(DemoHomeRepository())..add(LoadFeedbackUser()),
       child: Scaffold(
-        appBar: AppBar(backgroundColor: Colors.white),
+        appBar: AppBar(),
         body: BlocConsumer<FeedbackBloc, FeedbackState>(
           listener: (context, state) {
             if (state.submitted) {
@@ -41,12 +41,10 @@ class FeedbackPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('sendFeedback'.tr(), style: AppTextStyles.header),
+                    Text('sendFeedback'.tr(), style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color)),
                     Text(
                       'sendFeedbackSubTitle'.tr(),
-                      style: AppTextStyles.body.copyWith(
-                        color: Colors.grey[500],
-                      ),
+                      style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color),
                     ),
                     SizedBox(height: 24.h),
                     Center(
@@ -63,7 +61,7 @@ class FeedbackPage extends StatelessWidget {
                           SizedBox(height: 8.h),
                           Text(
                             state.user?.name ?? "",
-                            style: AppTextStyles.title,
+                            style: AppTextStyles.title.copyWith(color: Theme.of(context).textTheme.titleMedium?.color),
                           ),
                         ],
                       ),
@@ -131,9 +129,7 @@ class FeedbackPage extends StatelessWidget {
                         },
                         child: Text(
                           'submitFeedback'.tr(),
-                          style: AppTextStyles.title.copyWith(
-                            color: Colors.white,
-                          ),
+                          style: AppTextStyles.title.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                     ),

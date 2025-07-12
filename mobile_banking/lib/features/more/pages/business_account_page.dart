@@ -40,10 +40,7 @@ class BusinessAccountPage extends StatelessWidget {
             return true; // allow pop
           },
           child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-             // title: Text('businessAccount'.tr()),
-            ),
+            appBar: AppBar(),
             body: SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(left: 20.w, top: 20.h, right: 20.w, bottom: 20.h),

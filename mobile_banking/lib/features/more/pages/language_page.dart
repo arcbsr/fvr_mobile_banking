@@ -29,14 +29,14 @@ class _LanguagePageState extends State<LanguagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white),
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 20.w, top: 20.h, right: 20.w, bottom: 20.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('selectLanguage'.tr(), style: AppTextStyles.header),
+              Text('selectLanguage'.tr(), style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color)),
               const SizedBox(height: 16),
               ...languages.map((lang) {
                 final isSelected = _selectedLanguage == lang['code'];
@@ -52,7 +52,7 @@ class _LanguagePageState extends State<LanguagePage> {
                     decoration: BoxDecoration(
                       color: isSelected ? Colors.deepPurple.shade50 : Colors.white,
                       border: Border.all(
-                        color: isSelected ? Colors.deepPurple : Colors.grey.shade300,
+                        color: isSelected ? Theme.of(context).primaryColor : Colors.grey.shade300,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -61,10 +61,10 @@ class _LanguagePageState extends State<LanguagePage> {
                         Text(lang['flag']!, style: const TextStyle(fontSize: 20)),
                         const SizedBox(width: 10),
                         Expanded(
-                          child: Text(lang['label']!, style: AppTextStyles.body),
+                          child: Text(lang['label']!, style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color)),
                         ),
                         if (isSelected)
-                          const Icon(Icons.check_circle, color: Colors.deepPurple),
+                          Icon(Icons.check_circle, color: Theme.of(context).primaryColor),
                       ],
                     ),
                   ),
@@ -89,7 +89,7 @@ class _LanguagePageState extends State<LanguagePage> {
                     });
                   }
                 },
-                child: Text('saveLanguage'.tr(), style: AppTextStyles.title.copyWith(color: Colors.white)),
+                child: Text('saveLanguage'.tr(), style: AppTextStyles.title.copyWith(color: Theme.of(context).colorScheme.onPrimary)),
               ),
             ],
           ),

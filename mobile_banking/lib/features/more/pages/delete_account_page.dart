@@ -40,7 +40,6 @@ class DeleteAccountPage extends StatelessWidget {
           },
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.white,
               title: Text('deleteAccount'.tr(),style: AppTextStyles.header,),
             ),
             body: SafeArea(

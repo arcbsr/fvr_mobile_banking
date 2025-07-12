@@ -77,10 +77,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
             return true; // allow pop
           },
           child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              //title: Text('deleteAccount'.tr()),
-            ),
+            appBar: AppBar(),
             body: SafeArea(
               child: Center(
                 child: SingleChildScrollView(

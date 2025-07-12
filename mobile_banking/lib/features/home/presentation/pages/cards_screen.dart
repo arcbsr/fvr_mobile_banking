@@ -53,7 +53,7 @@ class _CardsScreenState extends State<CardsScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(AppLocalizations.myCards, style: AppTextStyles.header),
+                    Text(AppLocalizations.myCards, style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color)),
                     InkWell(
                       borderRadius: BorderRadius.circular(8.r),
                       onTap: () {},
@@ -61,7 +61,7 @@ class _CardsScreenState extends State<CardsScreen> {
                         children: [
                           Text(
                             AppLocalizations.addCard,
-                            style: AppTextStyles.header,
+                            style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color),
                           ),
                           SizedBox(width: 8.w),
                           Icon(
@@ -214,21 +214,21 @@ class _CardWidget extends StatelessWidget {
                         SizedBox(width: 8.w),
                         Text(
                           card.type,
-                          style: AppTextStyles.header.copyWith(color: Colors.white),
+                          style: AppTextStyles.header.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                         ),
                         // Optionally, add a card tier or other info if available in DemoCard
                       ],
                     ),
                     Text(
                       card.maskedNumber,
-                      style: AppTextStyles.header.copyWith(color: Colors.white),
+                      style: AppTextStyles.header.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ],
                 ),
                 SizedBox(height: 18.h),
                 Text(
                   card.cardholderName,
-                  style: AppTextStyles.header.copyWith(color: Colors.white),
+                  style: AppTextStyles.header.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
                 SizedBox(height: 6.h),
                 Row(
@@ -237,7 +237,7 @@ class _CardWidget extends StatelessWidget {
                     Text(
                       'validThru'.tr(namedArgs: {'expiry': card.expiry}),
                       style: AppTextStyles.body.copyWith(
-                        color: Colors.white.withOpacity(0.7),
+                        color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.7),
                         fontSize: 13.sp,
                       ),
                     ),

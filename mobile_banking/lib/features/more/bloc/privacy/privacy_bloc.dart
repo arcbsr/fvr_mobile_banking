@@ -15,9 +15,5 @@ class PrivacyBloc extends Bloc<PrivacyEvent, PrivacyState> {
     on<ToggleAutoLock>((event, emit) {
       emit(state.copyWith(autoLock: !state.autoLock));
     });
-
-    on<ToggleDarkMode>((event, emit) {
-      emit(state.copyWith(darkMode: !state.darkMode));
-    });
   }
 }

@@ -48,10 +48,7 @@ class LanguageChangePage extends StatelessWidget {
             return true; // allow pop
           },
           child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              // title: Text('businessAccount'.tr()),
-            ),
+            appBar: AppBar(),
             body: SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(

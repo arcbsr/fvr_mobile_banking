@@ -7,6 +7,25 @@ class AppTheme {
         primaryColor: const Color(0xFF6F45E9),
         scaffoldBackgroundColor: Colors.white,
         textTheme: GoogleFonts.nunitoTextTheme(),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Color(0xFF191919),
+          iconTheme: IconThemeData(color: Color(0xFF191919)),
+          elevation: 0,
+        ),
+      );
+
+  static ThemeData get darkTheme => ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: const Color(0xFF6F45E9),
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: GoogleFonts.nunitoTextTheme(ThemeData.dark().textTheme),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.white),
+          elevation: 0,
+        ),
       );
 }
 

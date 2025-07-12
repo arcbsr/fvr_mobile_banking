@@ -82,7 +82,6 @@ class MoreScreens extends StatelessWidget {
           }
         },
         child: Scaffold(
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: Column(
               children: [
@@ -106,14 +105,14 @@ class MoreScreens extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Hello, ${user.name}!',
-                                  style: AppTextStyles.title,
+                                  'Hello,  {user.name}!',
+                                  style: AppTextStyles.title.copyWith(color: Theme.of(context).textTheme.titleLarge?.color),
                                 ),
                                 SizedBox(height: 2.h),
                                 Text(
                                   user.phoneNumber ?? "",
                                   style: AppTextStyles.body.copyWith(
-                                    color: Colors.grey[500],
+                                    color: Theme.of(context).textTheme.bodySmall?.color?.withOpacity(0.7),
                                   ),
                                 ),
                               ],
@@ -248,7 +247,7 @@ class _SectionTitle extends StatelessWidget {
       child: Text(
         title,
         style: AppTextStyles.body.copyWith(
-          color: Colors.grey[500],
+          color: Theme.of(context).textTheme.bodySmall?.color,
           fontWeight: FontWeight.w600,
           fontSize: 13.sp,
         ),

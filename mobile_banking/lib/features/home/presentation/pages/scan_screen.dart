@@ -9,7 +9,6 @@ class ScanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,12 +21,12 @@ class ScanScreen extends StatelessWidget {
                 children: [
                   Text(
                     'scan_qrCode'.tr(),
-                    style: AppTextStyles.header,
+                    style: AppTextStyles.header.copyWith(color: Theme.of(context).textTheme.titleLarge?.color),
                   ),
                   SizedBox(height: 6.h),
                   Text(
                     'scan_fastPayments'.tr(),
-                    style: AppTextStyles.body,
+                    style: AppTextStyles.body.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color),
                   ),
                 ],
               ),
@@ -158,11 +157,11 @@ class _ScanActionCard extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: AppTextStyles.title,
+          style: AppTextStyles.title.copyWith(color: Theme.of(context).textTheme.titleMedium?.color),
         ),
         subtitle: Text(
           subtitle,
-          style: AppTextStyles.caption,
+          style: AppTextStyles.caption.copyWith(color: Theme.of(context).textTheme.bodySmall?.color),
         ),
         trailing: Icon(Icons.chevron_right_rounded, color: Colors.grey[400], size: 22.sp),
         onTap: onTap,

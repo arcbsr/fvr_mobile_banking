@@ -8,4 +8,3 @@ abstract class PrivacyEvent extends Equatable {
 class TogglePrivacyMode extends PrivacyEvent {}
 class ToggleFingerprintUnlock extends PrivacyEvent {}
 class ToggleAutoLock extends PrivacyEvent {}
-class ToggleDarkMode extends PrivacyEvent {}
