@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
+
+import '../../../login/pages/signup_flow.dart';
+import '../../../login/signup_block/signup_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 4), () {
-      Navigator.of(context).pushReplacementNamed('/main');
+    Timer(const Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacementNamed('/login');
     });
   }
 

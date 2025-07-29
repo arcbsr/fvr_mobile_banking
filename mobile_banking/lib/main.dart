@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'core/network/my_http_overrides.dart';
 import 'core/theme/app_theme.dart';
+import 'dependency_injection/locator.dart';
 import 'features/home/presentation/pages/home_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,9 +12,16 @@ import 'features/home/presentation/pages/splash_screen.dart';
 import 'core/theme/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/login/pages/login_screen.dart';
+import 'features/login/pages/signup_flow.dart';
+import 'features/login/pages/signup_screen.dart';
+ServiceLocator dependencyInjector = ServiceLocator();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  dependencyInjector.servicesLocator();
+  HttpOverrides.global = MyHttpOverrides();
   final prefs = await SharedPreferences.getInstance();
   final savedLang = prefs.getString('selected_language');
   runApp(
@@ -47,6 +58,8 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (context) => const SplashScreen(),
+            '/login': (context) => const LoginScreen(),
+            '/signup': (context) => SignupFlow(),
             '/main': (context) => const HomeScreen(),
           },
           localizationsDelegates: context.localizationDelegates,
