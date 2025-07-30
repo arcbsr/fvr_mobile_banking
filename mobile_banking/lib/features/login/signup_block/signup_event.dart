@@ -124,6 +124,7 @@ class SelectTermsOption extends SignupEvent {
 
 class SignUpRequestSubmitted extends SignupEvent {
   final String email;
+  final String password;
   final String gender;
   final String first_name;
   final String last_name;
@@ -140,7 +141,7 @@ class SignUpRequestSubmitted extends SignupEvent {
   final String? store_name;//
   final String? referral_code;//
 
-  SignUpRequestSubmitted({required this.email, required this.gender,
+  SignUpRequestSubmitted({required this.email,required this.password, required this.gender,
     required this.first_name,required this.last_name, required this.user_name,
     required this.account_type,required this.country_id, required this.state_id,
     this.city_id,required this.day, required this.month,

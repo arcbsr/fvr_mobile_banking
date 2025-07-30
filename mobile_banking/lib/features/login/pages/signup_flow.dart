@@ -35,7 +35,8 @@ class _SignupFlowState extends State<SignupFlow> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SignupBloc, SignupState>(
-      listenWhen: (previous, current) => previous.currentPage != current.currentPage,
+      listenWhen: (previous, current) =>
+          previous.currentPage != current.currentPage,
       listener: (context, state) {
         _pageController.animateToPage(
           state.currentPage,
@@ -60,21 +61,53 @@ class _SignupFlowState extends State<SignupFlow> {
           actions: [
             Padding(
               padding: const EdgeInsets.all(12),
-              child: Text("Help?", style: TextStyle(color: Colors.purple.shade700)),
+              child: Text(
+                "Help?",
+                style: TextStyle(color: Colors.purple.shade700),
+              ),
             ),
           ],
           elevation: 0,
         ),
-        body: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: const [
-            BasicInfoScreen(),
-            DobScreen(),
-            AddressScreen(),
-            PasswordScreen(),
-            TermsConditionsScreen(),
-          ],
+        body: BlocConsumer<SignupBloc, SignupState>(
+          listener: (context, state) async {
+            if (state.status == AuthStatus.loading) {
+              showDialog(
+                context: context,
+                builder: (_) =>
+                const Center(child: CircularProgressIndicator()),
+              );
+            } else if (state.status == AuthStatus.success) {
+              Navigator.pop(context); // Close loader
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text("Login Successful")));
+              await Future.delayed(Duration(milliseconds: 500), () {
+                Navigator.of(context).pushReplacementNamed('/main');
+              });
+            } else if (state.status == AuthStatus.failure) {
+              Navigator.pop(context); // Close loader
+              print("state.message ${state.errorMessage}");
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text("state.message ${state.errorMessage}")));
+            }
+          },
+          builder: (context, state) {
+            return SafeArea(
+              child: PageView(
+                controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  BasicInfoScreen(),
+                  DobScreen(),
+                  AddressScreen(),
+                  PasswordScreen(),
+                  TermsConditionsScreen(),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -107,12 +140,12 @@ class _SignupFlowState extends State<SignupFlow> {
   @override
   Widget build(BuildContext context) {
 
-  *//*  return Provider<SignupBloc>(
+  */ /*  return Provider<SignupBloc>(
       create: (_) => SignupBloc(),
       child: MaterialApp(
         home: SignupFlow(),
       ),
-    );*//*
+    );*/ /*
 
     return BlocProvider(
       create: (_) => SignupBloc(),

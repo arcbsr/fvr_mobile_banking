@@ -6,8 +6,31 @@ import '../signup_block/signup_bloc.dart';
 import '../signup_block/signup_event.dart';
 import '../widget/labeled_input_field.dart';
 
-class PasswordScreen extends StatelessWidget {
+class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
+
+  @override
+  State<PasswordScreen> createState() => _PasswordScreen();
+}
+
+class _PasswordScreen extends State<PasswordScreen> {
+  late TextEditingController passwordController;
+  late TextEditingController confirmPasswordController;
+
+  @override
+  void initState() {
+    super.initState();
+    final state = context.read<SignupBloc>().state;
+    passwordController = TextEditingController(text: state.password);
+    confirmPasswordController = TextEditingController(text: state.confirmPassword);
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
   final List<String> country = const [
     'India',
     'Bangladesh',
@@ -32,6 +55,7 @@ class PasswordScreen extends StatelessWidget {
           const SizedBox(height: 20),
           LabeledInputField(
             label: 'Password',
+            controller: passwordController,
             obscureText: true,
             showToggle: true,
             onChanged: (v) => bloc.add(UpdatePassword(v)),
@@ -39,6 +63,7 @@ class PasswordScreen extends StatelessWidget {
           const SizedBox(height: 16),
           LabeledInputField(
             label: 'Confirm Password',
+            controller: confirmPasswordController,
             obscureText: true,
             showToggle: true,
             onChanged: (v) => bloc.add(UpdateConfirmPassword(v)),

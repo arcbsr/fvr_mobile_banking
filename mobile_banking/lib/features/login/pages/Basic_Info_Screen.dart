@@ -6,109 +6,138 @@ import '../signup_block/signup_bloc.dart';
 import '../signup_block/signup_event.dart';
 import '../widget/labeled_input_field.dart';
 
-class BasicInfoScreen extends StatelessWidget {
+class BasicInfoScreen extends StatefulWidget {
   const BasicInfoScreen({super.key});
+
+  @override
+  State<BasicInfoScreen> createState() => _BasicInfoScreenState();
+}
+
+class _BasicInfoScreenState extends State<BasicInfoScreen> {
+  late TextEditingController firstNameController;
+  late TextEditingController lastNameController;
+  late TextEditingController userNameController;
+  late TextEditingController emailNameController;
+  late TextEditingController referralCodeController;
+
+  @override
+  void initState() {
+    super.initState();
+    final state = context.read<SignupBloc>().state;
+    firstNameController = TextEditingController(text: state.firstName);
+    lastNameController = TextEditingController(text: state.lastName);
+    userNameController = TextEditingController(text: state.username);
+    emailNameController = TextEditingController(text: state.email);
+    referralCodeController = TextEditingController(text: state.referralCode);
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    userNameController.dispose();
+    emailNameController.dispose();
+    referralCodeController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<SignupBloc>();
-
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text("Sign Up", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          const Text("Let's start with some basic info"),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: LabeledInputField(
-                  label: 'First Name',
-                  onChanged: (v) => bloc.add(UpdateFirstName(v)),
-                ),
-                /*TextField(
-                  decoration: const InputDecoration(labelText: "First Name"),
-                  onChanged: (v) => bloc.add(UpdateFirstName(v)),
-                ),*/
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child:  LabeledInputField(
-                  label: 'Last Name',
-                  onChanged: (v) => bloc.add(UpdateLastName(v)),
-                ),
-
-               /* TextField(
-                  decoration: const InputDecoration(labelText: "Last Name"),
-                  onChanged: (v) => bloc.add(UpdateLastName(v)),
-                ),*/
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          LabeledInputField(
-            label: 'Username',
-            onChanged: (v) => bloc.add(UpdateUsername(v)),
-          ),
-         /* TextField(
-            decoration: const InputDecoration(labelText: "Username"),
-            onChanged: (v) => bloc.add(UpdateUsername(v)),
-          ),*/
-          const SizedBox(height: 16),
-          LabeledInputField(
-            label: 'Email Address',
-            onChanged: (v) => bloc.add(UpdateEmail(v)),
-          ),
-         /* TextField(
-            decoration: const InputDecoration(labelText: "Email Address"),
-            onChanged: (v) => bloc.add(UpdateEmail(v)),
-          ),*/
-          const SizedBox(height: 16),
-          GenderDropdown(
-            //selectedGender: state.gender,
-            onChanged: (gender) {
-              if (gender != null) {
-                bloc.add(UpdateGender(gender));
-              }
-            },
-          ),
-         // GenderDropdown(onChanged: (g) => bloc.add(UpdateGender(g))),
-          const SizedBox(height: 16),
-          /*TextField(
-            decoration: const InputDecoration(labelText: "Referral Code (optional)"),
-            onChanged: (v) => bloc.add(UpdateReferralCode(v)),
-          ),*/
-          LabeledInputField(
-            label: 'Referral Code (optional)',
-            onChanged: (v) => bloc.add(UpdateReferralCode(v)),
-          ),
-          const Spacer(),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
-              onPressed: () => bloc.add(GoToNextPage()),
-              child: Text("Continue",style: AppTextStyles.title.copyWith(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onPrimary,
-              )),
+    final state = context.read<SignupBloc>().state;
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Sign Up",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
-          const SizedBox(height: 16),
-          const Center(
-            child: Text.rich(
-              TextSpan(
-                text: "Already have an account? ",
-                children: [TextSpan(text: "Sign In", style: TextStyle(color: Colors.purple))],
+            const Text("Let's start with some basic info"),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: LabeledInputField(
+                    label: 'First Name',
+                    controller: firstNameController,
+                    onChanged: (v) => bloc.add(UpdateFirstName(v)),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: LabeledInputField(
+                    label: 'Last Name',
+                    controller: lastNameController,
+                    onChanged: (v) => bloc.add(UpdateLastName(v)),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            LabeledInputField(
+              label: 'Username',
+              controller: userNameController,
+              onChanged: (v) => bloc.add(UpdateUsername(v)),
+            ),
+            const SizedBox(height: 16),
+            LabeledInputField(
+              label: 'Email Address',
+              controller: emailNameController,
+              onChanged: (v) => bloc.add(UpdateEmail(v)),
+            ),
+            const SizedBox(height: 16),
+            GenderDropdown(
+              selectedGender: state.gender,
+              onChanged: (gender) {
+                if (gender != null) {
+                  bloc.add(UpdateGender(gender));
+                }
+              },
+            ),
+            const SizedBox(height: 16),
+            LabeledInputField(
+              label: 'Referral Code (optional)',
+              controller: referralCodeController,
+              onChanged: (v) => bloc.add(UpdateReferralCode(v)),
+            ),
+            //const Spacer(),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                ),
+                onPressed: () => bloc.add(GoToNextPage()),
+                child: Text(
+                  "Continue",
+                  style: AppTextStyles.title.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-         // const Center(child: Text("by 🟡🟥🟢 Tetra")),
-        ],
+            const SizedBox(height: 16),
+            const Center(
+              child: Text.rich(
+                TextSpan(
+                  text: "Already have an account? ",
+                  children: [
+                    TextSpan(
+                      text: "Sign In",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            // const Center(child: Text("by 🟡🟥🟢 Tetra")),
+          ],
+        ),
       ),
     );
   }
@@ -134,9 +163,9 @@ class GenderDropdown extends StatelessWidget {
         border: OutlineInputBorder(),
       ),
       items: const [
-        DropdownMenuItem(value: 'Male', child: Text("Male")),
-        DropdownMenuItem(value: 'Female', child: Text("Female")),
-        DropdownMenuItem(value: 'Other', child: Text("Other")),
+        DropdownMenuItem(value: 'male', child: Text("Male")),
+        DropdownMenuItem(value: 'female', child: Text("Female")),
+        DropdownMenuItem(value: 'other', child: Text("Other")),
       ],
     );
   }

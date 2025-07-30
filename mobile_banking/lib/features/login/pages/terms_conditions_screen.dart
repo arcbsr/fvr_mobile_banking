@@ -81,7 +81,8 @@ class TermsConditionsScreen extends StatelessWidget {
                       minimumSize: const Size.fromHeight(50)),
 
                   onPressed: () {
-                    bloc.add(SignUpRequestSubmitted(email: state.email, gender: state.gender,
+                     print("password ${state.selectedCountry}");
+                    bloc.add(SignUpRequestSubmitted(email: state.email, password: state.password, gender: state.gender,
                     first_name: state.firstName, last_name: state.lastName, user_name: state.username,
                     account_type: "0", country_id: state.selectedCountry, state_id: state.selectedState,
                     day: state.dob?.day??1, month: state.dob?.month??1, year: state.dob?.year??1990 ));
@@ -92,7 +93,7 @@ class TermsConditionsScreen extends StatelessWidget {
                     bloc.add(GoToNextPage());
                   }
                       : null,*/
-                  child: Text("Continue",style: AppTextStyles.title.copyWith(
+                  child: Text("Submit",style: AppTextStyles.title.copyWith(
                     color: Theme.of(
                       context,
                     ).colorScheme.onPrimary,

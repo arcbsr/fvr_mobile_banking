@@ -52,8 +52,9 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     on<SignUpRequestSubmitted>((event, emit) async {
       emit(state.copyWith(status: AuthStatus.loading));
       try {
-        Map<String, String> data = {
+        Map<String, dynamic> data = {
           'email': event.email,
+          'password': event.password,
           'gender': event.gender,
           'first_name': event.first_name,
           'last_name': event.last_name,
@@ -67,7 +68,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         };
 
         print("data object $data");
-        /*final getData = await authApiRepository.signUpApi(data);
+        final getData = await authApiRepository.signUpApi(data);
         if (getData.status == true) {
           emit(state.copyWith(status: AuthStatus.success));
         } else {
@@ -77,7 +78,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
               errorMessage: "Invalid credentials",
             ),
           );
-        }*/
+        }
       } catch (e) {
         emit(
           state.copyWith(
