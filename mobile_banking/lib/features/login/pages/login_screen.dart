@@ -47,13 +47,32 @@ class _LoginScreenState extends State<LoginScreen>
                     const Center(child: CircularProgressIndicator()),
               );
             } else if (state is AuthSuccess) {
+              // print("User: ${state.user.data}");
+              print("KYC Verified: ${state.kycVerified}");
               Navigator.pop(context); // Close loader
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(const SnackBar(content: Text("Login Successful")));
-              await Future.delayed(Duration(milliseconds: 500), () {
-                Navigator.of(context).pushReplacementNamed('/main');
-              });
+              if (state.kycVerified) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Login Successful")),
+                );
+                await Future.delayed(Duration(milliseconds: 500), () {
+                  Navigator.of(context).pushReplacementNamed('/main');
+                });
+              } else {
+                /*context.read<AuthBloc>().add(
+                  KycVerification(),
+                );*/
+                Navigator.of(context).pushNamed('/kyc_verification_page');
+                /*  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                      value: context.read<AuthBloc>(),
+                      // provide the existing bloc
+                      child: KycVerificationPage(),
+                    ),
+                  ),
+                );*/
+              }
             } else if (state is AuthFailure) {
               Navigator.pop(context); // Close loader
               print("state.message ${state.message}");
@@ -199,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen>
                             if (_tabController.index == 0) {
                               final phone =
                                   countryCode + phoneController.text.trim();
-                             /* context.read<AuthBloc>().add(
+                              /* context.read<AuthBloc>().add(
                                 PhoneLoginSubmitted(
                                   phone: phone,
                                   password: password,
@@ -236,7 +255,8 @@ class _LoginScreenState extends State<LoginScreen>
                               context,
                               MaterialPageRoute(
                                 builder: (_) => BlocProvider(
-                                  create: (_) => SignupBloc(authApiRepository: getIt()),
+                                  create: (_) =>
+                                      SignupBloc(authApiRepository: getIt()),
                                   child: const SignupFlow(),
                                 ),
                               ),

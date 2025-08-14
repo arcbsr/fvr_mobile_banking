@@ -12,6 +12,7 @@ class PhoneLoginSubmitted extends AuthEvent {
 
   PhoneLoginSubmitted({this.phone,this.email, required this.password});
 }
+class KycVerification extends AuthEvent {}
 
 /*
 class EmailLoginSubmitted extends AuthEvent {

@@ -12,6 +12,7 @@ import 'features/home/presentation/pages/splash_screen.dart';
 import 'core/theme/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/login/pages/kyc_verification_page.dart';
 import 'features/login/pages/login_screen.dart';
 import 'features/login/pages/signup_flow.dart';
 import 'features/login/pages/signup_screen.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => const SplashScreen(),
             '/login': (context) => const LoginScreen(),
+            '/kyc_verification_page': (context) => const KycVerificationPage(),
             '/signup': (context) => SignupFlow(),
             '/main': (context) => const HomeScreen(),
           },

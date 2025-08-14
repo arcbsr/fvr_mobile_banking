@@ -73,7 +73,7 @@ class NetworkApiService implements BaseApiServices {
             },
             body: data,
           )
-          .timeout(const Duration(seconds: 10));
+          .timeout(const Duration(seconds: 100));
       responseJson = returnResponse(response);
     } on SocketException {
       throw NoInternetException('No Internet Connection');
@@ -86,6 +86,58 @@ class NetworkApiService implements BaseApiServices {
     }
     return responseJson;
   }
+
+/*  @override
+  Future<dynamic> postApi(String url, dynamic data) async {
+    if (kDebugMode) {
+      print(url);
+    }
+
+    var apiKey = "mobix-7p342tybn653wnkh248532";
+    dynamic responseJson;
+
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse(url))
+        ..headers.addAll({
+          'Accept': 'application/json',
+          'api-key': apiKey,
+          // ❌ Don't manually set Content-Type for multipart/form-data
+        });
+
+      // Add normal fields
+      data.forEach((key, value) {
+        if (value is String) {
+          request.fields[key] = value;
+        }
+      });
+
+      // Add files if present
+      for (var entry in data.entries) {
+        if (entry.value is File) {
+          request.files.add(await http.MultipartFile.fromPath(
+            entry.key,
+            (entry.value as File).path,
+          ));
+        }
+      }
+
+      var streamedResponse =
+      await request.send().timeout(const Duration(seconds: 10));
+      var response = await http.Response.fromStream(streamedResponse);
+
+      responseJson = returnResponse(response);
+    } on SocketException {
+      throw NoInternetException('No Internet Connection');
+    } on TimeoutException {
+      throw FetchDataException('Network Request time out');
+    }
+
+    if (kDebugMode) {
+      print(responseJson);
+    }
+    return responseJson;
+  }*/
+
 
   /// Parses the [response] and returns the corresponding JSON data.
   ///

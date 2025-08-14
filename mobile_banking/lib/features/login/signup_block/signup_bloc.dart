@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moix_app/features/login/model/user_model.dart';
 
 import '../auth_api/auth_api_repository.dart';
 import 'signup_event.dart';
@@ -68,7 +69,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         };
 
         print("data object $data");
-        final getData = await authApiRepository.signUpApi(data);
+        final UserModel getData = await authApiRepository.signUpApi(data);
         if (getData.status == true) {
           emit(state.copyWith(status: AuthStatus.success));
         } else {
