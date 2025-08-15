@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,19 +72,19 @@ class UploadIdScreen extends StatelessWidget {
                 itemCount: state.idOrPassportImageList.length,
                 itemBuilder: (context, index) {
                   return ClipRRect(
-                      borderRadius: BorderRadius.circular(12), // change value for more/less rounding
-                      child: Image.file(
-                        state.idOrPassportImageList[index],
-                        height: 200.h,
-                        fit: BoxFit.fill,
-                      ),
-                    );
+                    borderRadius: BorderRadius.circular(12),
+                    // change value for more/less rounding
+                    child: Image.file(
+                      state.idOrPassportImageList[index],
+                      height: 200.h,
+                      fit: BoxFit.fill,
+                    ),
+                  );
                 },
               ),
             ),
 
           const Spacer(),
-
 
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -95,27 +93,16 @@ class UploadIdScreen extends StatelessWidget {
             ),
             onPressed: (state.idOrPassportImageList.isNotEmpty)
                 ? () {
-              context.read<KycBloc>().add(GoToNextKycPage());
-            }
+                    context.read<KycBloc>().add(GoToNextKycPage());
+                  }
                 : null,
-            child: Text("Continue", style: AppTextStyles.title.copyWith(
-              color: Theme.of(context).colorScheme.onPrimary,
-            )),
-          ),
-
-         /* ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple,
-              minimumSize: const Size(double.infinity, 48),
-            ),
-            onPressed: () {},
             child: Text(
               "Continue",
               style: AppTextStyles.title.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
-          ),*/
+          ),
         ],
       ),
     );

@@ -33,8 +33,8 @@ class _KycFlowState extends State<KycFlow> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<KycBloc, KycState>(
-      listenWhen: (previous, current) =>
-          previous.currentPage != current.currentPage,
+/*      listenWhen: (previous, current) =>
+          previous.currentPage != current.currentPage,*/
       listener: (context, state) async {
         _pageController.animateToPage(
           state.currentPage,
@@ -42,6 +42,7 @@ class _KycFlowState extends State<KycFlow> {
           curve: Curves.easeInOut,
         );
 
+        print("Kyc status $state.status");
         if (state.status == KycStatus.loading) {
           showDialog(
             context: context,

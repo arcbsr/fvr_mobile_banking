@@ -65,7 +65,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
         final UserKyc getData = await userApiRepository.userKyc(data);
         if (getData.status == true) {
 
-          print("data object getData $getData");
+          print("data object getData ${getData.toString()}");
           emit(state.copyWith(status: KycStatus.success));
         } else {
           emit(
