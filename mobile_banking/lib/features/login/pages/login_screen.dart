@@ -50,16 +50,16 @@ class _LoginScreenState extends State<LoginScreen>
               // print("User: ${state.user.data}");
               print("KYC Verified: ${state.kycVerified}");
               Navigator.pop(context); // Close loader
-            /*  if (state.kycVerified) {
+              if (state.kycVerified) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Login Successful")),
                 );
                 await Future.delayed(Duration(milliseconds: 500), () {
                   Navigator.of(context).pushReplacementNamed('/main');
                 });
-              } else {*/
+              } else {
                 Navigator.of(context).pushNamed('/kyc_verification_page');
-              // }
+               }
             } else if (state is AuthFailure) {
               Navigator.pop(context); // Close loader
               print("state.message ${state.message}");
