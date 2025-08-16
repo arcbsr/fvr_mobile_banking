@@ -39,6 +39,8 @@ class NetworkApiService implements BaseApiServices {
             },
           )
           .timeout(const Duration(seconds: 20));
+      
+      responseJson = returnResponse(response);
     } on SocketException {
       throw NoInternetException('');
     } on TimeoutException {

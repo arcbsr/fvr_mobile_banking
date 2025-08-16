@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moix_app/core/theme/app_theme.dart';
-import '../../data/repositories/demo_home_repository.dart';
-import '../../domain/entities/user_entity.dart';
+import '../bloc/home_bloc.dart';
 import 'package:moix_app/l10n/app_localizations.dart';
 
 class BalanceCard extends StatelessWidget {
@@ -10,38 +10,18 @@ class BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _repo = DemoHomeRepository();
-    return FutureBuilder<User>(
-      future: _repo.getUser(),
-      builder: (context, snapshot) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
         final isDark = Theme.of(context).brightness == Brightness.dark;
-        if (!snapshot.hasData) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-            child: Container(
-              width: double.infinity,
-              height: 120.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(28.r),
-                gradient: isDark
-                    ? null
-                    : const LinearGradient(
-                        colors: [Color(0xFF270685), Color(0xFF5732BF)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                color: isDark ? Theme.of(context).colorScheme.surfaceVariant : null,
-              ),
-            ),
-          );
-        }
-        // For demo, hardcode balance and currency
-        final balance = '14 235,21';
-        final currency = kDemoCurrency;
+        
+        if (state is HomeAccountsLoaded && state.accountsData.data != null && state.accountsData.data!.isNotEmpty) {
+          final account = state.accountsData.data!.first;
+          final balance = account.accountBalance?.toStringAsFixed(2) ?? '0.00';
+          final currency = 'DZD'; // Default currency
         final Color textColor = isDark ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onPrimary;
         final Color subTextColor = isDark ? Theme.of(context).colorScheme.onSurface.withOpacity(0.7) : Theme.of(context).colorScheme.onPrimary.withOpacity(0.7);
         final Color iconColor = isDark ? Theme.of(context).colorScheme.onSurface : Colors.white;
-        return Padding(
+          return Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           child: Container(
             width: double.infinity,
@@ -142,7 +122,46 @@ class BalanceCard extends StatelessWidget {
               ],
             ),
           ),
-        );
+          );
+        } else if (state is HomeLoading) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            child: Container(
+              width: double.infinity,
+              height: 120.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(28.r),
+                gradient: isDark
+                    ? null
+                    : const LinearGradient(
+                        colors: [Color(0xFF270685), Color(0xFF5732BF)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                color: isDark ? Theme.of(context).colorScheme.surfaceVariant : null,
+              ),
+            ),
+          );
+        } else {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            child: Container(
+              width: double.infinity,
+              height: 120.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(28.r),
+                gradient: isDark
+                    ? null
+                    : const LinearGradient(
+                        colors: [Color(0xFF270685), Color(0xFF5732BF)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                color: isDark ? Theme.of(context).colorScheme.surfaceVariant : null,
+              ),
+            ),
+          );
+        }
       },
     );
   }

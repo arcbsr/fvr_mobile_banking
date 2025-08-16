@@ -4,11 +4,14 @@ import '../../domain/entities/transaction_entity.dart';
 import '../../domain/entities/card_entity.dart';
 import '../../domain/repositories/home_repository.dart';
 import '../models/accounts_model.dart';
+import 'accounts_http_api_repository.dart';
 import 'package:flutter/material.dart';
 
 const String kDemoCurrency = 'DZD';
 
-class DemoHomeRepository implements HomeRepository {
+class RealHomeRepository implements HomeRepository {
+  final AccountsHttpApiRepository _accountsApiRepository = AccountsHttpApiRepository();
+
   @override
   Future<User> getUser() async {
     return User(
@@ -118,37 +121,12 @@ class DemoHomeRepository implements HomeRepository {
     required String accounts,
     required String screen,
   }) async {
-    // For demo purposes, return mock data
-    // In real implementation, this would call the actual API
-    return AccountsModel(
-      status: true,
-      isSmileVerified: 0,
-      userName: 'Demo User',
-      mobile: '+213 5555412943',
-      isKycVerified: 1,
-      profileImageUrl: 'https://example.com/avatar.png',
-      totalBalance: 7500,
-      businessStatus: false,
-      data: [
-        Account(
-          id: '1',
-          accountNo: 'CPDZ01000006902',
-          accountType: 0,
-          balance: 5000,
-          accountBalance: 5000.0,
-          isActivated: 1,
-          createdDtm: '2025-07-28 14:55:02',
-        ),
-        Account(
-          id: '2',
-          accountNo: 'CPDZ01000006903',
-          accountType: 1,
-          balance: 2500,
-          accountBalance: 2500.0,
-          isActivated: 1,
-          createdDtm: '2025-07-28 15:00:00',
-        ),
-      ],
+    // Call the real API
+    return await _accountsApiRepository.getAccounts(
+      userId: userId,
+      loginCode: loginCode,
+      accounts: accounts,
+      screen: screen,
     );
   }
-} 
+}

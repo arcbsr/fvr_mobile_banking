@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../data/repositories/demo_home_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/home_bloc.dart';
 import 'package:moix_app/core/theme/app_theme.dart';
 import '../../../settings/presentation/pages/language_settings_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class HomeHeader extends StatelessWidget {
-  HomeHeader({super.key});
-  final _repo = DemoHomeRepository();
+  const HomeHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _repo.getUser(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return SizedBox(height: 60.h); // Placeholder height
-        }
-        final user = snapshot.data!;
-        return Padding(
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        if (state is HomeAccountsLoaded && state.accountsData.data != null && state.accountsData.data!.isNotEmpty) {
+          final userName = state.accountsData.userName ?? 'User';
+          final profileImage = state.accountsData.profileImageUrl ?? 'assets/icons/avatar.png';
+          final isKycVerified = state.accountsData.isKycVerified == 1;
+          
+          return Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,11 +29,13 @@ class HomeHeader extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 18.r,
-                      backgroundImage: AssetImage(user.avatarUrl??""),
+                      backgroundImage: profileImage.startsWith('http') 
+                          ? NetworkImage(profileImage) as ImageProvider
+                          : AssetImage(profileImage) as ImageProvider,
                     ),
                     SizedBox(width: 12.w),
                     Text(
-                      'helloUser'.tr(namedArgs: {'name': user.name??""}),
+                      'helloUser'.tr(namedArgs: {'name': userName}),
                       style: AppTextStyles.header,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -46,11 +48,11 @@ class HomeHeader extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF4DA66B),
+                      color: isKycVerified ? const Color(0xFF4DA66B) : const Color(0xFFFFA500),
                       borderRadius: BorderRadius.circular(36.r),
                     ),
                     child: Text(
-                      'earnAmount'.tr(namedArgs: {'amount': user.earnAmount.toString()}),
+                      isKycVerified ? 'KYC Verified' : 'KYC Pending',
                       style: AppTextStyles.body.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ),
@@ -69,7 +71,7 @@ class HomeHeader extends StatelessWidget {
                       children: [
                         Icon(Icons.notifications_none_rounded,
                             size: 32.sp, color: const Color(0xFF191919)),
-                        if ((user.notificationCount??0) > 0)
+                        if (isKycVerified)
                           Positioned(
                             right: 2.w,
                             top: -2.h,
@@ -90,6 +92,13 @@ class HomeHeader extends StatelessWidget {
             ],
           ),
         );
+        } else if (state is HomeLoading) {
+          return SizedBox(height: 60.h); // Loading placeholder
+        } else if (state is HomeError) {
+          return SizedBox(height: 60.h); // Error placeholder
+        } else {
+          return SizedBox(height: 60.h); // Initial state placeholder
+        }
       },
     );
   }

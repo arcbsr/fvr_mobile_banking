@@ -8,6 +8,7 @@ class AppUrl {
   static var signUpEndPint = '$baseUrl/api/v2/auth/register';
   static var verificationStatus = '$baseUrl/api/v2/user/verification_status';
   static var userKyc = '$baseUrl/api/v2/user/kyc';
+  static var accountsEndpoint = '$baseUrl/api/v1/accounts';
 
   //
 }
